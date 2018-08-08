@@ -57,6 +57,22 @@
       </fieldset>
     </form>
 
+    <button id="games-index">Get all games</button>
+    <button id="games-create">Create game</button>
+    <form id="games-show">
+      <input type="number" name="id" placeholder="ID">
+      <button>Show game</button>
+    </form>
+
+    <form id="games-update">
+      <input name="id" type="text" placeholder="ID">
+      <input name="game[cell][index]" type="text" placeholder="Index">
+      <input name="game[cell][value]" type="text" placeholder="Value">
+      <input name="game[over]" type="text" placeholder="gameover" value="false">
+      <button>Update game</button>
+    </form>
+
+
   </div>
 
 
