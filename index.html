@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Example</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <!-- Do not add `link` tags-->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body>
-      <h1>Browser Template</h1>
-    </body>
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+<body>
+  <h1>Tic Tac Toe</h1>
+  <h4 id="auth-flash"></h4>
+  <ul class="nav nav-pills">
+    <!--<button id="sign-up" class="btn btn-primary pull-right">Sign up</button>
+    <button id="sign-in" class="btn btn-primary pull-right">Sign in</button>
+    <button id="sign-out" class="btn btn-primary pull-right">Sign out</button>
+    <button id="change-password" class="btn btn-primary pull-right">Change Password</button>-->
+  </ul>
+  <div id="sign-in-up">
+
+    <form id='sign-up' class="border">
+      <fieldset>
+        <legend>Sign Up</legend>
+        <input type="email" name ='credentials[email]' placeholder="Email" required>
+        <input type="password" name ='credentials[password]' placeholder="Password" required>
+        <input type="password" name ='credentials[password_confirmation]' placeholder="Confirm Password" required>
+        <button type="submit">Sign Up</button>
+      </fieldset>
+    </form>
+
+    <form id='sign-in' class="border">
+      <fieldset>
+        <legend>Sign In</legend>
+        <input type="email" name ='credentials[email]' placeholder="Email" required>
+        <input type="password" name ='credentials[password]' placeholder="Password" required>
+        <button type="submit">Sign In</button>
+      </fieldset>
+    </form>
+
+    <form id='change-password' class="border">
+      <fieldset>
+        <legend>Change Password</legend>
+        <input type="password" name ='passwords[old]' placeholder="Old Password" required>
+        <input type="password" name ='passwords[new]' placeholder="New Password" required>
+        <button type="submit">Change Password</button>
+      </fieldset>
+    </form>
+
+    <form id='sign-out' class="border">
+      <fieldset>
+        <legend>Sign Out</legend>
+        <button type="submit">Sign Out</button>
+      </fieldset>
+    </form>
+
+  </div>
+
+
+</body>
 </html>
