@@ -25,15 +25,15 @@ const create = function () {
   })
 }
 
-const show = function (data) {
+const show = function (id) {
   DEBUG && console.log('games api create')
-  DEBUG && console.log(data.id)
+  DEBUG && console.log(id)
   return $.ajax({
     method: 'GET',
     headers: {
       'Authorization': 'Token token=' + store.user.token
     },
-    url: apiUrl + 'games/' + data.id
+    url: apiUrl + 'games/' + id
   })
 }
 

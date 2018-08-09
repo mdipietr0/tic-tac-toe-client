@@ -23,8 +23,19 @@
   <h1>Tic Tac Toe</h1>
   <div>
     <h4 id="auth-flash"></h4>
+    <h4 id="winner-banner" class="hidden banner"></h4>
   </div>
-
+  <div id="game-buttons" class="container hidden game-button-container">
+    <form>
+    <div class="form group">
+      <button id="new-game" class="btn btn-primary col-md-offset-3 col-md-6 game-button form-control">New Game</button>
+    </div>
+    <div class="form group">
+      <button id="load-game" class="btn btn-primary col-md-offset-3 col-md-6 game-button form-control">Load Game</button>
+    </div>
+    </form>
+  </div>
+  <div id="game-list" class="align-center hidden"></div>
   <!-- Modal -->
   <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -106,6 +117,7 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
   <div id="game-container" class="container hidden">
 
     <div id="game-board" class="board">

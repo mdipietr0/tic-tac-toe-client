@@ -3,7 +3,6 @@
 const {DEBUG} = require('../config')
 const store = require('../store')
 const {flash} = require('../templates/helpers/flash')
-
 const onSignUpSuccess = function () {
   DEBUG && console.log('onSignUpSuccess')
   $('#registerModal').modal('hide')
@@ -32,7 +31,8 @@ const onSignInSuccess = function (response) {
   $('#login').addClass('hidden')
   $('#sign-out').removeClass('hidden')
   $('#change-password-btn').removeClass('hidden')
-  $('#game-container').removeClass('hidden')
+  $('#game-buttons').removeClass('hidden')
+  // $('#game-container').removeClass('hidden')
   flash(true, 'Successfully signed in!')
 }
 
@@ -62,7 +62,14 @@ const onSignOutSuccess = function () {
   $('#sign-out').addClass('hidden')
   $('#change-password-btn').addClass('hidden')
   $('#sign-out input').val('')
+  $('#game-buttons').addClass('hidden')
+  $('#game-list').addClass('hidden')
   $('#game-container').addClass('hidden')
+  store.user = {}
+  for (let i = 0; i < 9; i++) {
+    $(`#box-${i + 1}`).find('.token').text('')
+    $(`#box-${i + 1}`).find('.token').addClass('hidden')
+  }
   flash(true, 'Successfully signed out!')
 }
 

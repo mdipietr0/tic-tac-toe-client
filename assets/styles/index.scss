@@ -15,6 +15,14 @@ $white: #fff;
   background-color: $failure-color;
   color: $white;
   padding: 10px;
+
+}
+
+.banner {
+  font-size: 48px;
+  color: $success-color;
+  padding: 10px;
+  text-align: center
 }
 
 h1 {
@@ -53,4 +61,16 @@ h1 {
 .token {
   font-size: 96px;
   color: grey;
+}
+
+.game-button {
+  margin: 25px auto;
+}
+
+.game-button-container {
+  width: 500px;
+}
+
+.btn-select-game {
+  margin-top: 20px;
 }
