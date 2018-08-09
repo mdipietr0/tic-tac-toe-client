@@ -10,6 +10,11 @@ const onSignUp = function (e) {
   const data = getFormFields(e.target)
   api.signUp(data)
     .then(ui.onSignUpSuccess)
+    .then(function () {
+      api.signIn(data)
+        .then(ui.onSignInSuccess)
+        .catch(ui.onSignInFailure)
+    })
     .catch(ui.onSignUpFailure)
 }
 
@@ -27,7 +32,7 @@ const onSignOut = function (e) {
   DEBUG && console.log('sign out!')
   api.signOut()
     .then(ui.onSignOutSuccess)
-    .catch(ui.onSignOutFailure)
+    .catch(ui.onSignOutSuccess)
 }
 
 const onChangePassword = function (e) {

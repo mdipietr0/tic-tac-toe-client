@@ -37,12 +37,19 @@ const onUpdateGame = function (e) {
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
 }
+
+const onBoxClick = function (e) {
+  console.log(e.target.id[e.target.id.length - 1])
+  $(this).find('.token').removeClass('hidden')
+}
+
 const addHandlers = function () {
   console.log('game events addHandlers')
   $('#games-index').on('click', onGetAllGames)
   $('#games-create').on('click', onCreateGame)
   $('#games-show').on('submit', onShowGame)
   $('#games-update').on('submit', onUpdateGame)
+  $('.box').on('click', onBoxClick)
 }
 
 module.exports = {

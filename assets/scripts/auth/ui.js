@@ -2,95 +2,74 @@
 
 const {DEBUG} = require('../config')
 const store = require('../store')
+const {flash} = require('../templates/helpers/flash')
 
 const onSignUpSuccess = function () {
   DEBUG && console.log('onSignUpSuccess')
+  $('#registerModal').modal('hide')
   $('#sign-up input').val('')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('success')
-  $('#auth-flash').text('Successfully signed up!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  $('#register').addClass('hidden')
+  $('#login').addClass('hidden')
+  $('#sign-out').removeClass('hidden')
+  $('#change-password-btn').removeClass('hidden')
+  flash(true, 'Successfully signed up')
+  return new Promise((resolve, reject) => resolve())
 }
 
 const onSignUpFailure = function () {
   DEBUG && console.log('onSignUpFailure')
   $('#sign-up input').val('')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('failure')
-  $('#auth-flash').text('Unable to Sign up!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(false, 'Unable to Sign up!')
 }
 
 const onSignInSuccess = function (response) {
   DEBUG && console.log(response.user.token)
   DEBUG && console.log('onSignInSuccess')
   store.user = response.user
+  $('#loginModal').modal('hide')
   $('#sign-in input').val('')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('success')
-  $('#auth-flash').text('Successfully signed in!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  $('#register').addClass('hidden')
+  $('#login').addClass('hidden')
+  $('#sign-out').removeClass('hidden')
+  $('#change-password-btn').removeClass('hidden')
+  $('#game-container').removeClass('hidden')
+  flash(true, 'Successfully signed in!')
 }
 
 const onSignInFailure = function () {
   DEBUG && console.log('onSignInFailure')
   $('#sign-in input').val('')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('failure')
-  $('#auth-flash').text('Unable to Sign in!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(false, 'Unable to Sign in!')
 }
 
 const onChangePasswordSuccess = function () {
   DEBUG && console.log('onChangePasswordSuccess')
+  $('#changePasswordModal').modal('hide')
   $('#change-password input').val('')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('success')
-  $('#auth-flash').text('Successfully changed password!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(true, 'Successfully changed password!')
 }
 
 const onChangePasswordFailure = function () {
   DEBUG && console.log('onChangePasswordFailure')
   $('#change-password input').val('')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('failure')
-  $('#auth-flash').text('Unable to change password!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(false, 'Password change unsuccessful')
 }
 
 const onSignOutSuccess = function () {
   DEBUG && console.log('onSignOutSuccess')
+  $('#register').removeClass('hidden')
+  $('#login').removeClass('hidden')
+  $('#sign-out').addClass('hidden')
+  $('#change-password-btn').addClass('hidden')
   $('#sign-out input').val('')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('success')
-  $('#auth-flash').text('Successfully signed out!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  $('#game-container').addClass('hidden')
+  flash(true, 'Successfully signed out!')
 }
 
 const onSignOutFailure = function () {
   DEBUG && console.log('onSignOutFailure')
   $('#sign-out input').val('')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('failure')
-  $('#auth-flash').text('Unable to sign out!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(false, 'Sign out unsuccessful!')
 }
 module.exports = {
   onSignUpSuccess,
