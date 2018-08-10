@@ -96,7 +96,8 @@ const onBoxClick = function (e) {
         // refactor this to UI
         let winner
         if (logic.isGameOver(store.game)) {
-          winner = store.playerX
+          console.log('testing now')
+          winner = store.playerX ? 'X' : 'O'
         }
         if (winner) {
           console.log('game over, ' + winner + ' wins')
