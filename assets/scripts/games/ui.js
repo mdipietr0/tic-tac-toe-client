@@ -41,11 +41,7 @@ const onGetAllGamesFailure = function () {
 }
 
 const onCreateGameSuccess = function (response) {
-  store.game = response.game
-  store.playerX = true
-  console.log(store.game)
   console.log('onCreateGameSuccess')
-  console.log(store.game.cells)
   flash(true, 'Create game successful')
   clearBoard()
 }

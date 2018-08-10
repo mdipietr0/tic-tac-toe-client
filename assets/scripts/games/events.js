@@ -17,6 +17,13 @@ const onGetAllGames = function () {
 const onCreateGame = function () {
   console.log('game events onCreateGame')
   api.create()
+    .then(function (response) {
+      store.game = response.game
+      store.playerX = true
+      console.log(store.game)
+      console.log(store.game.cells)
+      console.log('create game object')
+    })
     .then(ui.onCreateGameSuccess)
     .catch(ui.onCreateGameFailure)
 }
