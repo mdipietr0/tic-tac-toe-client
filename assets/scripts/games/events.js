@@ -124,23 +124,6 @@ const onBoxClick = function (e) {
   }
 }
 
-const onNewGame = function (e) {
-  e.preventDefault()
-  onCreateGame()
-  setTimeout(function () {
-    $('#winner-banner').addClass('hidden')
-    $('#game-container').removeClass('hidden')
-    $('#game-buttons').addClass('hidden')
-  }, 500)
-}
-
-const onLoadGame = function (e) {
-  e.preventDefault()
-  $('#winner-banner').addClass('hidden')
-  console.log('game events new game')
-  onGetAllGames()
-}
-
 const addHandlers = function () {
   console.log('game events addHandlers')
   $('#games-index').on('click', onGetAllGames)
@@ -148,8 +131,8 @@ const addHandlers = function () {
   // $('#games-show').on('submit', onShowGame)
   $('#games-update').on('submit', onUpdateGame)
   $('.box').on('click', onBoxClick)
-  $('#new-game').on('click', onNewGame)
-  $('#load-game').on('click', onLoadGame)
+  $('#new-game').on('click', onCreateGame)
+  $('#load-game').on('click', onGetAllGames)
   $('#game-list').on('click', 'button', onShowGame)
 }
 

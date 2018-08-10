@@ -32,6 +32,7 @@ const onGetAllGamesSuccess = function (response) {
   $('#game-list').html(html)
   $('#game-list').removeClass('hidden')
   $('#game-buttons').addClass('hidden')
+  $('#winner-banner').addClass('hidden')
 }
 
 const onGetAllGamesFailure = function () {
@@ -42,6 +43,11 @@ const onGetAllGamesFailure = function () {
 const onCreateGameSuccess = function () {
   console.log('onCreateGameSuccess')
   // flash(true, 'Create game successful')
+  setTimeout(function () {
+    $('#winner-banner').addClass('hidden')
+    $('#game-container').removeClass('hidden')
+    $('#game-buttons').addClass('hidden')
+  }, 500)
   clearBoard()
 }
 
