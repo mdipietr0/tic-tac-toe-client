@@ -2,10 +2,9 @@
 const getFormFields = require('../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
-const {DEBUG} = require('../config')
 
 const onSignUp = function (e) {
-  DEBUG && console.log('events onSignUp!')
+  console.log('events onSignUp!')
   e.preventDefault()
   const data = getFormFields(e.target)
   api.signUp(data)
@@ -20,7 +19,7 @@ const onSignUp = function (e) {
 
 const onSignIn = function (e) {
   e.preventDefault()
-  DEBUG && console.log('events onSignIn')
+  console.log('events onSignIn')
   const data = getFormFields(e.target)
   api.signIn(data)
     .then(ui.onSignInSuccess)
@@ -29,7 +28,7 @@ const onSignIn = function (e) {
 
 const onSignOut = function (e) {
   e.preventDefault()
-  DEBUG && console.log('sign out!')
+  console.log('sign out!')
   api.signOut()
     .then(ui.onSignOutSuccess)
     .catch(ui.onSignOutSuccess)
@@ -37,7 +36,7 @@ const onSignOut = function (e) {
 
 const onChangePassword = function (e) {
   e.preventDefault()
-  DEBUG && console.log('changePassword!')
+  console.log('changePassword!')
   const data = getFormFields(e.target)
   api.changePassword(data)
     .then(ui.onChangePasswordSuccess)
@@ -49,7 +48,7 @@ const addHandlers = function () {
   $('#sign-in').on('submit', onSignIn)
   $('#sign-out').on('submit', onSignOut)
   $('#change-password').on('submit', onChangePassword)
-  DEBUG && console.log('addHandlers')
+  console.log('addHandlers')
 }
 
 module.exports = {

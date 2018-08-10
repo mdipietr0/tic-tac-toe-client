@@ -6,7 +6,6 @@ const api = require('./api')
 const logic = require('./logic')
 const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
-// const {DEBUG} = require('../config')
 
 const onGetAllGames = function () {
   console.log('game events onGetAllGames')
@@ -118,7 +117,7 @@ const addHandlers = function () {
   console.log('game events addHandlers')
   $('#games-index').on('click', onGetAllGames)
   $('#games-create').on('click', onCreateGame)
-  $('#games-show').on('submit', onShowGame)
+  // $('#games-show').on('submit', onShowGame)
   $('#games-update').on('submit', onUpdateGame)
   $('.box').on('click', onBoxClick)
   $('#new-game').on('click', onNewGame)

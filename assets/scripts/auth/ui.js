@@ -1,10 +1,10 @@
 'use strict'
 
-const {DEBUG} = require('../config')
 const store = require('../store')
 const {flash} = require('../templates/helpers/flash')
+
 const onSignUpSuccess = function () {
-  DEBUG && console.log('onSignUpSuccess')
+  console.log('onSignUpSuccess')
   $('#registerModal').modal('hide')
   $('#sign-up input').val('')
   $('#register').addClass('hidden')
@@ -16,14 +16,14 @@ const onSignUpSuccess = function () {
 }
 
 const onSignUpFailure = function () {
-  DEBUG && console.log('onSignUpFailure')
+  console.log('onSignUpFailure')
   $('#sign-up input').val('')
   flash(false, 'Unable to Sign up!')
 }
 
 const onSignInSuccess = function (response) {
-  DEBUG && console.log(response.user.token)
-  DEBUG && console.log('onSignInSuccess')
+  console.log(response.user.token)
+  console.log('onSignInSuccess')
   store.user = response.user
   $('#loginModal').modal('hide')
   $('#sign-in input').val('')
@@ -37,26 +37,26 @@ const onSignInSuccess = function (response) {
 }
 
 const onSignInFailure = function () {
-  DEBUG && console.log('onSignInFailure')
+  console.log('onSignInFailure')
   $('#sign-in input').val('')
   flash(false, 'Unable to Sign in!')
 }
 
 const onChangePasswordSuccess = function () {
-  DEBUG && console.log('onChangePasswordSuccess')
+  console.log('onChangePasswordSuccess')
   $('#changePasswordModal').modal('hide')
   $('#change-password input').val('')
   flash(true, 'Successfully changed password!')
 }
 
 const onChangePasswordFailure = function () {
-  DEBUG && console.log('onChangePasswordFailure')
+  console.log('onChangePasswordFailure')
   $('#change-password input').val('')
   flash(false, 'Password change unsuccessful')
 }
 
 const onSignOutSuccess = function () {
-  DEBUG && console.log('onSignOutSuccess')
+  console.log('onSignOutSuccess')
   $('#register').removeClass('hidden')
   $('#login').removeClass('hidden')
   $('#sign-out').addClass('hidden')
@@ -74,7 +74,7 @@ const onSignOutSuccess = function () {
 }
 
 const onSignOutFailure = function () {
-  DEBUG && console.log('onSignOutFailure')
+  console.log('onSignOutFailure')
   $('#sign-out input').val('')
   flash(false, 'Sign out unsuccessful!')
 }
