@@ -39,6 +39,9 @@ const onShowGame = function (e) {
     id = getFormFields(e.target).id
   }
   api.show(id)
+    .then(function (response) {
+      store.game = response.game
+    })
     .then(ui.onShowGameSuccess)
     .catch(ui.onShowGameFailure)
 }
@@ -50,6 +53,9 @@ const onUpdateGame = function (e) {
   const data = getFormFields(e.target)
   console.log(data)
   api.update(data)
+    .then(function (response) {
+      store.game = response.game
+    })
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
 }
@@ -77,6 +83,9 @@ const onBoxClick = function (e) {
     console.log('Square is available')
 
     api.update(data)
+      .then(function (response) {
+        store.game = response.game
+      })
       .then(ui.onUpdateGameSuccess)
       .then(function () {
         const data = {}
@@ -95,8 +104,12 @@ const onBoxClick = function (e) {
           data.game.over = true
           data.id = store.game.id
           api.update(data)
-            .then(ui.onGameOver)
-            .catch(ui.onGameOver)
+            .then(function (response) {
+              store.game.over = response.game.over
+            })
+            .catch(function () {
+              console.log('game over update failed')
+            })
         }
         store.playerX = !store.playerX
         console.log('player x ' + store.playerX)

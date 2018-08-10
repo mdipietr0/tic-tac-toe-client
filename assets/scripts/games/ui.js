@@ -5,11 +5,10 @@ const store = require('../store')
 // const logic = require('./logic')
 
 const clearBoard = function () {
-  store.game.cells.forEach((cell, i) => {
-    console.log(i + ' ' + cell)
-    $(`#box-${i + 1}`).find('.token').addClass('hidden')
-    $(`#box-${i + 1}`).find('.token').text('')
-  })
+  for (let i = 1; i < 10; i++) {
+    $(`#box-${i}`).find('.token').addClass('hidden')
+    $(`#box-${i}`).find('.token').text('')
+  }
 }
 
 const updateBoard = function () {
@@ -24,7 +23,7 @@ const updateBoard = function () {
 
 const onGetAllGamesSuccess = function (response) {
   console.log('onGetAllGamesSuccess')
-  flash(true, 'Get all games successful')
+  // flash(true, 'Get all games successful')
   let html = `<h4 class="col-md-offset-5 col-md-2 text-center align-center">Select a game</h4>`
   console.log(response.games)
   response.games.filter(game => game.over === false).reduce((acc, game) => {
@@ -40,9 +39,9 @@ const onGetAllGamesFailure = function () {
   flash(false, 'Get all games failure')
 }
 
-const onCreateGameSuccess = function (response) {
+const onCreateGameSuccess = function () {
   console.log('onCreateGameSuccess')
-  flash(true, 'Create game successful')
+  // flash(true, 'Create game successful')
   clearBoard()
 }
 
@@ -52,9 +51,8 @@ const onCreateGameFailure = function () {
 }
 
 const onShowGameSuccess = function (response) {
-  store.game = response.game
   console.log('onShowGameSuccess')
-  flash(true, 'Show game successful')
+  // flash(true, 'Show game successful')
   $('#game-list').addClass('hidden')
   updateBoard()
   $('#game-container').removeClass('hidden')
@@ -65,22 +63,15 @@ const onShowGameFailure = function () {
   flash(false, 'Show game unsuccessful')
 }
 
-const onUpdateGameSuccess = function (response) {
-  console.log(response.game)
-  store.game = response.game
+const onUpdateGameSuccess = function () {
   console.log('onUpdateGameSuccess')
-  flash(true, 'Update game successful')
+  // flash(true, 'Update game successful')
   updateBoard()
 }
 
 const onUpdateGameFailure = function () {
   console.log('onUpdateGameFailure')
   flash(false, 'Update game failure')
-}
-
-const onGameOver = function (response) {
-  store.game.over = response.game.over
-  console.log('ui on game over')
 }
 
 module.exports = {
@@ -91,6 +82,5 @@ module.exports = {
   onShowGameSuccess,
   onShowGameFailure,
   onUpdateGameSuccess,
-  onUpdateGameFailure,
-  onGameOver
+  onUpdateGameFailure
 }
