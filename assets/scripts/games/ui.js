@@ -1,7 +1,7 @@
 'use strict'
 
 const {flash} = require('../templates/helpers/flash.js')
-const store = require('../store')
+// const store = require('../store')
 // const logic = require('./logic')
 
 const clearBoard = function () {
@@ -11,8 +11,8 @@ const clearBoard = function () {
   }
 }
 
-const updateBoard = function () {
-  store.game.cells.forEach((cell, i) => {
+const updateBoard = function (cells) {
+  cells.forEach((cell, i) => {
     console.log(i + ' ' + cell)
     if (cell !== '') {
       $(`#box-${i + 1}`).find('.token').text(cell.toUpperCase())
@@ -54,7 +54,7 @@ const onShowGameSuccess = function (response) {
   console.log('onShowGameSuccess')
   // flash(true, 'Show game successful')
   $('#game-list').addClass('hidden')
-  updateBoard()
+  // updateBoard()
   $('#game-container').removeClass('hidden')
 }
 
@@ -66,7 +66,7 @@ const onShowGameFailure = function () {
 const onUpdateGameSuccess = function () {
   console.log('onUpdateGameSuccess')
   // flash(true, 'Update game successful')
-  updateBoard()
+  // updateBoard()
 }
 
 const onUpdateGameFailure = function () {
@@ -82,5 +82,6 @@ module.exports = {
   onShowGameSuccess,
   onShowGameFailure,
   onUpdateGameSuccess,
-  onUpdateGameFailure
+  onUpdateGameFailure,
+  updateBoard
 }
