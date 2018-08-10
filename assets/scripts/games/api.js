@@ -1,10 +1,10 @@
 'use strict'
 
-const {apiUrl, DEBUG} = require('../config')
+const {apiUrl} = require('../config')
 const store = require('../store')
 
 const index = function () {
-  DEBUG && console.log('games api index')
+  console.log('games api index')
   return $.ajax({
     method: 'GET',
     headers: {
@@ -15,7 +15,7 @@ const index = function () {
 }
 
 const create = function () {
-  DEBUG && console.log('games api create')
+  console.log('games api create')
   return $.ajax({
     method: 'POST',
     headers: {
@@ -26,8 +26,8 @@ const create = function () {
 }
 
 const show = function (id) {
-  DEBUG && console.log('games api create')
-  DEBUG && console.log(id)
+  console.log('games api create')
+  console.log(id)
   return $.ajax({
     method: 'GET',
     headers: {

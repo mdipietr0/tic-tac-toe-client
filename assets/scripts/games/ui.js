@@ -1,16 +1,30 @@
 'use strict'
 
+const {flash} = require('../templates/helpers/flash.js')
 const store = require('../store')
-const logic = require('./logic')
+// const logic = require('./logic')
+
+const clearBoard = function () {
+  store.game.cells.forEach((cell, i) => {
+    console.log(i + ' ' + cell)
+    $(`#box-${i + 1}`).find('.token').addClass('hidden')
+    $(`#box-${i + 1}`).find('.token').text('')
+  })
+}
+
+const updateBoard = function () {
+  store.game.cells.forEach((cell, i) => {
+    console.log(i + ' ' + cell)
+    if (cell !== '') {
+      $(`#box-${i + 1}`).find('.token').text(cell.toUpperCase())
+      $(`#box-${i + 1}`).find('.token').removeClass('hidden')
+    }
+  })
+}
 
 const onGetAllGamesSuccess = function (response) {
   console.log('onGetAllGamesSuccess')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('success')
-  $('#auth-flash').text('Get all games successful!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(true, 'Get all games successful')
   let html = `<h4 class="col-md-offset-5 col-md-2 text-center align-center">Select a game</h4>`
   console.log(response.games)
   response.games.filter(game => game.over === false).reduce((acc, game) => {
@@ -23,103 +37,49 @@ const onGetAllGamesSuccess = function (response) {
 
 const onGetAllGamesFailure = function () {
   console.log('onGetAllGamesFailure')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('failure')
-  $('#auth-flash').text('Get all games unsuccessful!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(false, 'Get all games failure')
 }
 
 const onCreateGameSuccess = function (response) {
   store.game = response.game
   store.playerX = true
-  logic.drawBoard()
   console.log(store.game)
   console.log('onCreateGameSuccess')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('success')
-  $('#auth-flash').text('Create game successful!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
-  store.game.cells.forEach((cell, i) => {
-    console.log(i + ' ' + cell)
-    $(`#box-${i + 1}`).find('.token').addClass('hidden')
-    $(`#box-${i + 1}`).find('.token').text('')
-  })
+  console.log(store.game.cells)
+  flash(true, 'Create game successful')
+  clearBoard()
 }
 
 const onCreateGameFailure = function () {
   console.log('onCreateGameFailure')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('failure')
-  $('#auth-flash').text('Create game unsuccessful!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(false, 'Create game failure')
 }
 
 const onShowGameSuccess = function (response) {
-  console.log('onShowGameSuccess')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('success')
-  $('#auth-flash').text('Show game successful!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
   store.game = response.game
+  console.log('onShowGameSuccess')
+  flash(true, 'Show game successful')
   $('#game-list').addClass('hidden')
-  // logic.drawBoard()
-  store.game.cells.forEach((cell, i) => {
-    console.log(i + ' ' + cell)
-    if (cell !== '') {
-      $(`#box-${i + 1}`).find('.token').text(cell.toUpperCase())
-      $(`#box-${i + 1}`).find('.token').removeClass('hidden')
-    }
-  })
+  updateBoard()
   $('#game-container').removeClass('hidden')
 }
 
 const onShowGameFailure = function () {
   console.log('onShowGameFailure')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('failure')
-  $('#auth-flash').text('Show game unsuccessful!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(false, 'Show game unsuccessful')
 }
 
 const onUpdateGameSuccess = function (response) {
   console.log(response.game)
   store.game = response.game
   console.log('onUpdateGameSuccess')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('success')
-  $('#auth-flash').text('Update game successful!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
-
-  store.game.cells.forEach((cell, i) => {
-    console.log(i + ' ' + cell)
-    if (cell !== '') {
-      $(`#box-${i + 1}`).find('.token').text(cell.toUpperCase())
-      $(`#box-${i + 1}`).find('.token').removeClass('hidden')
-    }
-  })
-  logic.drawBoard()
+  flash(true, 'Update game successful')
+  updateBoard()
 }
 
 const onUpdateGameFailure = function () {
   console.log('onUpdateGameFailure')
-  $('#auth-flash').removeClass()
-  $('#auth-flash').addClass('failure')
-  $('#auth-flash').text('Update game unsuccessful!')
-  setTimeout(function () {
-    $('#auth-flash').text('')
-  }, 3000)
+  flash(false, 'Update game failure')
 }
 
 const onGameOver = function (response) {

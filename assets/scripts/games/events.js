@@ -71,9 +71,10 @@ const onBoxClick = function (e) {
     api.update(data)
       .then(ui.onUpdateGameSuccess)
       .then(function () {
+        console.log('second then')
         const data = {}
         data.game = {}
-        const winner = logic.isGameOver(store.game, store.playerX)
+        const winner = logic.isGameOver(store.game)
         if (winner) {
           console.log('game over, ' + winner + ' wins')
           $('#winner-banner').text(`${winner} Wins!!!`)

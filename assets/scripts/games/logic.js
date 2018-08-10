@@ -19,6 +19,7 @@ const Game = function () {
  *   player number: must be {1, 2}
  */
 const isGameOver = function (game) {
+  console.log(game)
   if ((game.cells[0] !== '' && game.cells[0] === game.cells[1] && game.cells[1] === game.cells[2]) ||
   (game.cells[3] !== '' && game.cells[3] === game.cells[4] && game.cells[4] === game.cells[5]) ||
   (game.cells[6] !== '' && game.cells[6] === game.cells[7] && game.cells[7] === game.cells[8]) ||
