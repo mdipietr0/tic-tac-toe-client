@@ -37,6 +37,7 @@ const onShowGame = function (e) {
 }
 
 const onUpdateGame = function (e) {
+  console.log('update nodename' + e.target.nodeName)
   e.preventDefault()
   console.log('game events onShowGame')
   const data = getFormFields(e.target)
@@ -47,33 +48,37 @@ const onUpdateGame = function (e) {
 }
 
 const onBoxClick = function (e) {
+  console.log('boxclick nodename' + e.target.nodeName)
   if (store.game.over) {
     return
   }
   const squareNum = e.target.id[e.target.id.length - 1]
-  const data = {}
-  data.id = store.game.id
-  data.game = {}
-  data.game.cell = {}
-  data.game.cell.index = squareNum - 1
-  if (store.playerX) {
-    data.game.cell.value = 'x'
-  } else {
-    data.game.cell.value = 'o'
+  const data = {
+    id: store.game.id,
+    game: {
+      cell: {
+        index: squareNum - 1,
+        value: store.playerX ? 'x' : 'o'
+      },
+      over: false
+    }
   }
-  data.game.over = false
   console.log(squareNum)
   // if square is available
   if (logic.isSquareAvailable(store.game.cells, data.game.cell.index)) {
     // send update request
     console.log('Square is available')
+
     api.update(data)
       .then(ui.onUpdateGameSuccess)
       .then(function () {
-        console.log('second then')
         const data = {}
         data.game = {}
-        const winner = logic.isGameOver(store.game)
+        // refactor this to UI
+        let winner
+        if (logic.isGameOver(store.game)) {
+          winner = store.playerX
+        }
         if (winner) {
           console.log('game over, ' + winner + ' wins')
           $('#winner-banner').text(`${winner} Wins!!!`)
@@ -93,7 +98,6 @@ const onBoxClick = function (e) {
   } else {
     console.log('square is unavailable')
   }
-  // $(this).find('.token').removeClass('hidden')
 }
 
 const onNewGame = function (e) {
