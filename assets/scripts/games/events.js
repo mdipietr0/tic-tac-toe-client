@@ -65,7 +65,9 @@ const onUpdateGame = function (e) {
 }
 
 const checkForWinner = function () {
-  if (store.game.over) {
+  if (store.game.isDraw()) {
+    ui.onDraw()
+  } else if (store.game.over) {
     ui.onWin(store.game.player)
   }
 }

@@ -83,7 +83,17 @@ const onUpdateGameFailure = function () {
 const onWin = function (winner) {
   setTimeout(function () {
     console.log('game over, ' + winner + ' wins')
-    $('#winner-banner').text(`${winner} Wins!!!`)
+    $('#winner-banner').text(`${winner.toUpperCase()} Wins!!!`)
+    $('#winner-banner').removeClass('hidden')
+    $('#game-buttons').removeClass('hidden')
+    $('#game-container').addClass('hidden')
+  }, 300)
+}
+
+const onDraw = function () {
+  setTimeout(function () {
+    console.log('game over, Draw')
+    $('#winner-banner').text(`Draw`)
     $('#winner-banner').removeClass('hidden')
     $('#game-buttons').removeClass('hidden')
     $('#game-container').addClass('hidden')
@@ -100,5 +110,6 @@ module.exports = {
   onUpdateGameSuccess,
   onUpdateGameFailure,
   updateBoard,
-  onWin
+  onWin,
+  onDraw
 }
