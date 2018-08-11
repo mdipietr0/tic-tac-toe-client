@@ -33,7 +33,7 @@ const isGameOver = function () {
   (this.cells[2] !== '' && this.cells[2] === this.cells[5] && this.cells[5] === this.cells[8]) ||
   (this.cells[0] !== '' && this.cells[0] === this.cells[4] && this.cells[4] === this.cells[8]) ||
   (this.cells[2] !== '' && this.cells[2] === this.cells[4] && this.cells[4] === this.cells[6])) {
-    gameOver()
+    this.gameOver()
     return true
   }
   return false
@@ -42,7 +42,7 @@ const isGameOver = function () {
 Game.prototype.isGameOver = isGameOver
 
 const gameOver = function () {
-  game.over = true
+  this.over = true
 }
 
 Game.prototype.gameOver = gameOver
@@ -79,15 +79,28 @@ const changePlayer = function () {
 Game.prototype.changePlayer = changePlayer
 
 const makeMove = function (index) {
+  const data = {
+    id: this.id,
+    game: {
+      cell: {
+        index: index,
+        value: this.player
+      },
+      over: false
+    }
+  }
   console.log('makeMove')
-  if (!this.isGameOver(game) && this.isSquareAvailable(index)) {
+  if (!this.isGameOver() && this.isSquareAvailable(index)) {
     this.cells[index] = this.player
-    const go = this.isGameOver(game)
+    const go = this.isGameOver()
     if (go) {
+      this.gameOver()
+      data.game.over = true
       console.log(this.player + 'WINS')
     }
-    changePlayer()
+    return data
   }
+  return false
 }
 
 Game.prototype.makeMove = makeMove

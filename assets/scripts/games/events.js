@@ -63,65 +63,32 @@ const onUpdateGame = function (e) {
     .catch(ui.onUpdateGameFailure)
 }
 
-const onBoxClick = function (e) {
-  console.log('boxclick nodename' + e.target.nodeName)
-  console.log('e.target.id' + e.target.id)
+const checkForWinner = function () {
   if (store.game.over) {
-    return
+    ui.onWin(store.game.player)
   }
-  // pulls the square number out of the ID (e.g. "box-1" returns '1')
-  const squareNum = e.target.id[e.target.id.length - 1]
-  console.log(squareNum)
-  console.log('player is ' + store.game.player)
-  // if square is available
-  if (store.game.isSquareAvailable(squareNum)) {
-    console.log('Square is available')
+}
 
-    const data = {
-      id: store.game.id,
-      game: {
-        cell: {
-          index: squareNum,
-          value: store.game.player
-        },
-        over: false
-      }
-    }
+// pulls the square number out of the ID (e.g. "box-1" returns '1')
+const getSquareNum = function (target) {
+  return target.id[target.id.length - 1]
+}
 
-    // send update request
+const updateBoard = function (response) {
+  store.game.cells = response.game.cells
+  ui.updateBoard(store.game.cells)
+}
+
+const onBoxClick = function (e) {
+  const squareNum = getSquareNum(e.target)
+  const data = store.game.makeMove(squareNum)
+  if (data) {
     api.update(data)
-      .then(function (response) {
-        store.game.cells = response.game.cells
-        ui.updateBoard(store.game.cells)
-      })
+      .then(updateBoard)
       .then(ui.onUpdateGameSuccess)
-      .then(function () {
-        const data = {}
-        data.game = {}
-        // refactor this to UI
-        let winner
-        if (store.game.isGameOver()) {
-          console.log('testing now')
-          winner = store.game.player
-        }
-        if (winner) {
-          ui.onWin(winner)
-          data.game.over = true
-          data.id = store.game.id
-          api.update(data)
-            .then(function (response) {
-              store.game.over = response.game.over
-            })
-            .catch(function () {
-              console.log('game over update failed')
-            })
-        }
-        store.game.changePlayer()
-        console.log(store.game.player)
-      })
+      .then(checkForWinner)
+      .then(store.game.changePlayer.bind(store.game))
       .catch(ui.onUpdateGameFailure)
-  } else {
-    console.log('square is unavailable')
   }
 }
 
