@@ -110,7 +110,7 @@
               </div>
               <button class="btn btn-block btn-primary" type="submit">Change Password</button>
               <hr>
-              <button class="btn btn-block btn-default" type="submit" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Cancel</button>
+              <button class="btn btn-block btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
             </fieldset>
           </form>
         </div>
@@ -119,7 +119,7 @@
   </div><!-- /.modal -->
 
   <div id="game-container" class="container hidden">
-
+    <h4 class="your-turn" data-player="X">Your turn Player X</h4>
     <div id="game-board" class="board">
     <div class="row article">
       <div id="box-0" class="col-xs-4 box border-bottom border-right"><span class="token hidden">X</span></div>

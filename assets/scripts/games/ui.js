@@ -19,6 +19,17 @@ const updateBoard = function (cells) {
       $(`#box-${i}`).find('.token').removeClass('hidden')
     }
   })
+  changeTurn()
+}
+
+const changeTurn = function () {
+  const yourTurn = $('.your-turn')
+  let player = yourTurn.attr('data-player')
+  player = player === 'X' ? 'O' : 'X'
+  yourTurn.attr('data-player', player)
+  let text = yourTurn.text()
+  text = text.slice(0, text.length - 1) + player
+  yourTurn.text(text)
 }
 
 const onGetAllGamesSuccess = function (response) {

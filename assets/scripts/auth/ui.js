@@ -11,7 +11,7 @@ const onSignUpSuccess = function () {
   $('#login').addClass('hidden')
   $('#sign-out').removeClass('hidden')
   $('#change-password-btn').removeClass('hidden')
-  flash(true, 'Successfully signed up')
+  // flash(true, 'Successfully signed up')
   return new Promise((resolve, reject) => resolve())
 }
 
@@ -33,7 +33,7 @@ const onSignInSuccess = function (response) {
   $('#change-password-btn').removeClass('hidden')
   $('#game-buttons').removeClass('hidden')
   // $('#game-container').removeClass('hidden')
-  flash(true, 'Successfully signed in!')
+  // flash(true, 'Successfully signed in!')
 }
 
 const onSignInFailure = function () {

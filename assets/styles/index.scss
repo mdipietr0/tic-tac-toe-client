@@ -5,6 +5,17 @@ $success-color: #5cb85c;
 $failure-color: #f00;
 $white: #fff;
 
+body {
+  color: grey;
+}
+
+.btn {
+  font-size: 16px;
+}
+
+.modal-title {
+  text-align: center;
+}
 .success {
   background-color: $success-color;
   color: $white;
@@ -26,7 +37,6 @@ $white: #fff;
 }
 
 h1 {
-  color: grey;
   text-align: center;
 }
 
@@ -60,7 +70,6 @@ h1 {
 
 .token {
   font-size: 96px;
-  color: grey;
 }
 
 .game-button {
@@ -73,4 +82,7 @@ h1 {
 
 .btn-select-game {
   margin-top: 20px;
+}
+.your-turn {
+  text-align: center;
 }
