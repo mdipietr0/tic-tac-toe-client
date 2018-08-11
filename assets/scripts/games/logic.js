@@ -41,6 +41,15 @@ const isGameOver = function () {
 
 Game.prototype.isGameOver = isGameOver
 
+const isDraw = function () {
+  if (this.cells.every(cell => cell !== '')) {
+    console.log('draw')
+    return true
+  }
+  return false
+}
+
+Game.prototype.isDraw = isDraw
 const gameOver = function () {
   this.over = true
 }
