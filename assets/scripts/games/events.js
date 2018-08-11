@@ -100,11 +100,13 @@ const onBoxClick = function (e) {
           winner = store.playerX ? 'X' : 'O'
         }
         if (winner) {
-          console.log('game over, ' + winner + ' wins')
-          $('#winner-banner').text(`${winner} Wins!!!`)
-          $('#winner-banner').removeClass('hidden')
-          $('#game-buttons').removeClass('hidden')
-          $('#game-container').addClass('hidden')
+          setTimeout(function () {
+            console.log('game over, ' + winner + ' wins')
+            $('#winner-banner').text(`${winner} Wins!!!`)
+            $('#winner-banner').removeClass('hidden')
+            $('#game-buttons').removeClass('hidden')
+            $('#game-container').addClass('hidden')
+          }, 300)
           data.game.over = true
           data.id = store.game.id
           api.update(data)
