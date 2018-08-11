@@ -7,12 +7,26 @@ $white: #fff;
 
 body {
   color: grey;
+  font-size: 16px;
 }
 
 .btn {
   font-size: 16px;
 }
 
+.player-counter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.counter {
+  font-size: 48px;
+}
+
+.counter-box {
+  display: flex;
+  justify-content: space-around;
+}
 .modal-title {
   text-align: center;
 }

@@ -93,8 +93,13 @@ const onUpdateGameFailure = function () {
 
 const onWin = function (winner) {
   setTimeout(function () {
+    winner = winner.toUpperCase()
     console.log('game over, ' + winner + ' wins')
-    $('#winner-banner').text(`${winner.toUpperCase()} Wins!!!`)
+    let winCount = parseInt($(`#counter${winner}`).text())
+    winCount += 1
+    console.log(winCount)
+    $(`#counter${winner}`).text(winCount)
+    $('#winner-banner').text(`${winner} Wins!!!`)
     $('#winner-banner').removeClass('hidden')
     $('#game-buttons').removeClass('hidden')
     $('#game-container').addClass('hidden')

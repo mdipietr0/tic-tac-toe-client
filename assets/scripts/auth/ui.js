@@ -66,6 +66,8 @@ const onSignOutSuccess = function () {
   $('#game-list').addClass('hidden')
   $('#game-container').addClass('hidden')
   $('#winner-banner').addClass('hidden')
+  $(`#counterX`).text(0)
+  $(`#counterO`).text(0)
   store.user = {}
   for (let i = 0; i < 9; i++) {
     $(`#box-${i + 1}`).find('.token').text('')
