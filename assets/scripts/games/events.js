@@ -4,6 +4,7 @@
 const ui = require('./ui')
 const api = require('./api')
 const logic = require('./logic')
+const {Game} = require('./logic')
 const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
 
@@ -18,6 +19,9 @@ const onCreateGame = function () {
   console.log('game events onCreateGame')
   api.create()
     .then(function (response) {
+      console.log(response.game.id)
+      store.game = new Game(response.game)
+      console.log('Game object instance ', store.game)
       store.game = response.game
       store.playerX = true
       console.log(store.game)

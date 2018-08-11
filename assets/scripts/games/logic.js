@@ -2,9 +2,14 @@
 
 // const store = require('../store')
 
-const Game = function () {
-  this.cells = ['', '', '', '', '', '', '', '', '']
-  this.over = false
+const Game = function (game = {cells: ['', '', '', '', '', '', '', '', ''], over: false}) {
+  if (game) {
+    this.id = game.id
+    this.cells = game.cells
+    this.over = game.over
+    this.player_x = game.player_x
+    this.player_o = game.player_o
+  }
   this.player = 'x'
 }
 
