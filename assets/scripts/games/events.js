@@ -95,6 +95,9 @@ const onBoxClick = function (e) {
   }
 }
 
+const onMainMenu = function () {
+  ui.onMainMenu()
+}
 const addHandlers = function () {
   console.log('game events addHandlers')
   $('#games-index').on('click', onGetAllGames)
@@ -105,6 +108,7 @@ const addHandlers = function () {
   $('#new-game').on('click', onCreateGame)
   $('#load-game').on('click', onGetAllGames)
   $('#game-list').on('click', 'button', onShowGame)
+  $('#main-menu').on('click', onMainMenu)
 }
 
 module.exports = {

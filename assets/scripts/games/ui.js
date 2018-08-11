@@ -116,7 +116,14 @@ const onDraw = function () {
   }, 300)
 }
 
+const onMainMenu = function () {
+  $('#winner-banner').removeClass('hidden')
+  $('#game-buttons').removeClass('hidden')
+  $('#game-container').addClass('hidden')
+}
+
 module.exports = {
+  onMainMenu,
   onCreateGameSuccess,
   onCreateGameFailure,
   onGetAllGamesSuccess,
