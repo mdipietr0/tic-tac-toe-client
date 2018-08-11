@@ -5,7 +5,7 @@ const {flash} = require('../templates/helpers/flash.js')
 // const logic = require('./logic')
 
 const clearBoard = function () {
-  for (let i = 1; i < 10; i++) {
+  for (let i = 0; i < 9; i++) {
     $(`#box-${i}`).find('.token').addClass('hidden')
     $(`#box-${i}`).find('.token').text('')
   }
@@ -15,8 +15,8 @@ const updateBoard = function (cells) {
   cells.forEach((cell, i) => {
     console.log(i + ' ' + cell)
     if (cell !== '') {
-      $(`#box-${i + 1}`).find('.token').text(cell.toUpperCase())
-      $(`#box-${i + 1}`).find('.token').removeClass('hidden')
+      $(`#box-${i}`).find('.token').text(cell.toUpperCase())
+      $(`#box-${i}`).find('.token').removeClass('hidden')
     }
   })
 }
@@ -80,6 +80,16 @@ const onUpdateGameFailure = function () {
   flash(false, 'Update game failure')
 }
 
+const onWin = function (winner) {
+  setTimeout(function () {
+    console.log('game over, ' + winner + ' wins')
+    $('#winner-banner').text(`${winner} Wins!!!`)
+    $('#winner-banner').removeClass('hidden')
+    $('#game-buttons').removeClass('hidden')
+    $('#game-container').addClass('hidden')
+  }, 300)
+}
+
 module.exports = {
   onCreateGameSuccess,
   onCreateGameFailure,
@@ -89,5 +99,6 @@ module.exports = {
   onShowGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure,
-  updateBoard
+  updateBoard,
+  onWin
 }

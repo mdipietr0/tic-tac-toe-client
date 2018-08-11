@@ -3,7 +3,7 @@
 // console.log = {}
 const ui = require('./ui')
 const api = require('./api')
-const logic = require('./logic')
+// const logic = require('./logic')
 const {Game} = require('./logic')
 const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
@@ -19,11 +19,8 @@ const onCreateGame = function () {
   console.log('game events onCreateGame')
   api.create()
     .then(function (response) {
-      console.log(response.game.id)
       store.game = new Game(response.game)
       console.log('Game object instance ', store.game)
-      store.game = response.game
-      store.playerX = true
       console.log(store.game)
       console.log(store.game.cells)
       console.log('create game object')
@@ -44,8 +41,8 @@ const onShowGame = function (e) {
   }
   api.show(id)
     .then(function (response) {
-      store.game = response.game
-      ui.updateBoard(response.game.cells)
+      store.game = new Game(response.game)
+      ui.updateBoard(store.game.cells)
     })
     .then(ui.onShowGameSuccess)
     .catch(ui.onShowGameFailure)
@@ -59,8 +56,8 @@ const onUpdateGame = function (e) {
   console.log(data)
   api.update(data)
     .then(function (response) {
-      store.game = response.game
-      ui.updateBoard(response.game.cells)
+      store.game = new Game(response.game)
+      ui.updateBoard(store.game.cells)
     })
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
@@ -68,30 +65,34 @@ const onUpdateGame = function (e) {
 
 const onBoxClick = function (e) {
   console.log('boxclick nodename' + e.target.nodeName)
+  console.log('e.target.id' + e.target.id)
   if (store.game.over) {
     return
   }
+  // pulls the square number out of the ID (e.g. "box-1" returns '1')
   const squareNum = e.target.id[e.target.id.length - 1]
-  const data = {
-    id: store.game.id,
-    game: {
-      cell: {
-        index: squareNum - 1,
-        value: store.playerX ? 'x' : 'o'
-      },
-      over: false
-    }
-  }
   console.log(squareNum)
+  console.log('player is ' + store.game.player)
   // if square is available
-  if (logic.isSquareAvailable(store.game.cells, data.game.cell.index)) {
-    // send update request
+  if (store.game.isSquareAvailable(squareNum)) {
     console.log('Square is available')
 
+    const data = {
+      id: store.game.id,
+      game: {
+        cell: {
+          index: squareNum,
+          value: store.game.player
+        },
+        over: false
+      }
+    }
+
+    // send update request
     api.update(data)
       .then(function (response) {
-        store.game = response.game
-        ui.updateBoard(response.game.cells)
+        store.game.cells = response.game.cells
+        ui.updateBoard(store.game.cells)
       })
       .then(ui.onUpdateGameSuccess)
       .then(function () {
@@ -99,18 +100,12 @@ const onBoxClick = function (e) {
         data.game = {}
         // refactor this to UI
         let winner
-        if (logic.isGameOver(store.game)) {
+        if (store.game.isGameOver()) {
           console.log('testing now')
-          winner = store.playerX ? 'X' : 'O'
+          winner = store.game.player
         }
         if (winner) {
-          setTimeout(function () {
-            console.log('game over, ' + winner + ' wins')
-            $('#winner-banner').text(`${winner} Wins!!!`)
-            $('#winner-banner').removeClass('hidden')
-            $('#game-buttons').removeClass('hidden')
-            $('#game-container').addClass('hidden')
-          }, 300)
+          ui.onWin(winner)
           data.game.over = true
           data.id = store.game.id
           api.update(data)
@@ -121,8 +116,8 @@ const onBoxClick = function (e) {
               console.log('game over update failed')
             })
         }
-        store.playerX = !store.playerX
-        console.log('player x ' + store.playerX)
+        store.game.changePlayer()
+        console.log(store.game.player)
       })
       .catch(ui.onUpdateGameFailure)
   } else {

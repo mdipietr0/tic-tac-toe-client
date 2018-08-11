@@ -23,25 +23,29 @@ const Game = function (game = {cells: ['', '', '', '', '', '', '', '', ''], over
  * @param {number} player
  *   player number: must be {1, 2}
  */
-const isGameOver = function (game) {
-  console.log(game)
-  if ((game.cells[0] !== '' && game.cells[0] === game.cells[1] && game.cells[1] === game.cells[2]) ||
-  (game.cells[3] !== '' && game.cells[3] === game.cells[4] && game.cells[4] === game.cells[5]) ||
-  (game.cells[6] !== '' && game.cells[6] === game.cells[7] && game.cells[7] === game.cells[8]) ||
-  (game.cells[0] !== '' && game.cells[0] === game.cells[3] && game.cells[3] === game.cells[6]) ||
-  (game.cells[1] !== '' && game.cells[1] === game.cells[4] && game.cells[4] === game.cells[7]) ||
-  (game.cells[2] !== '' && game.cells[2] === game.cells[5] && game.cells[5] === game.cells[8]) ||
-  (game.cells[0] !== '' && game.cells[0] === game.cells[4] && game.cells[4] === game.cells[8]) ||
-  (game.cells[2] !== '' && game.cells[2] === game.cells[4] && game.cells[4] === game.cells[6])) {
-    gameOver(game)
+const isGameOver = function () {
+  console.log(this)
+  if ((this.cells[0] !== '' && this.cells[0] === this.cells[1] && this.cells[1] === this.cells[2]) ||
+  (this.cells[3] !== '' && this.cells[3] === this.cells[4] && this.cells[4] === this.cells[5]) ||
+  (this.cells[6] !== '' && this.cells[6] === this.cells[7] && this.cells[7] === this.cells[8]) ||
+  (this.cells[0] !== '' && this.cells[0] === this.cells[3] && this.cells[3] === this.cells[6]) ||
+  (this.cells[1] !== '' && this.cells[1] === this.cells[4] && this.cells[4] === this.cells[7]) ||
+  (this.cells[2] !== '' && this.cells[2] === this.cells[5] && this.cells[5] === this.cells[8]) ||
+  (this.cells[0] !== '' && this.cells[0] === this.cells[4] && this.cells[4] === this.cells[8]) ||
+  (this.cells[2] !== '' && this.cells[2] === this.cells[4] && this.cells[4] === this.cells[6])) {
+    gameOver()
     return true
   }
   return false
 }
 
-const gameOver = function (game) {
+Game.prototype.isGameOver = isGameOver
+
+const gameOver = function () {
   game.over = true
 }
+
+Game.prototype.gameOver = gameOver
 
 /**
  * Checks if a square is available
@@ -51,40 +55,50 @@ const gameOver = function (game) {
  * @param {number} index
  *   square number {0,8}
  */
-const isSquareAvailable = function (cells, index) {
-  if (cells[index] === '') {
+const isSquareAvailable = function (index) {
+  console.log(this)
+  if (this.cells[index] === '') {
     return true
   }
   return false
 }
+
+Game.prototype.isSquareAvailable = isSquareAvailable
+
 // TODO be careful of pass by value
-const changePlayer = function (game) {
+const changePlayer = function () {
   console.log('changePlayer')
-  if (game.player === 'x') {
-    game.player = 'o'
+  if (this.player === 'x') {
+    this.player = 'o'
   } else {
-    game.player = 'x'
+    this.player = 'x'
   }
-  console.log(game.player)
+  console.log(this.player)
 }
 
-const makeMove = function (cells, index, player) {
+Game.prototype.changePlayer = changePlayer
+
+const makeMove = function (index) {
   console.log('makeMove')
-  if (!isGameOver(game) && isSquareAvailable(cells, index)) {
-    cells[index] = player
-    const go = isGameOver(game)
+  if (!this.isGameOver(game) && this.isSquareAvailable(index)) {
+    this.cells[index] = this.player
+    const go = this.isGameOver(game)
     if (go) {
-      console.log(game.player + 'WINS')
+      console.log(this.player + 'WINS')
     }
-    changePlayer(game)
+    changePlayer()
   }
 }
 
-const newGame = function (game) {
-  game.cells = ['', '', '', '', '', '', '', '', '']
-  game.over = false
-  game.player = 'x'
+Game.prototype.makeMove = makeMove
+
+const newGame = function () {
+  this.cells = ['', '', '', '', '', '', '', '', '']
+  this.over = false
+  this.player = 'x'
 }
+
+Game.prototype.newGame = newGame
 /**
  * Creates the game board
  */
@@ -92,23 +106,25 @@ const drawBoard = function (game) {
   game.cells.forEach(s => console.log(s))
 }
 
+Game.prototype.drawBoard = drawBoard
+
 const game = new Game()
 console.log(game)
-makeMove(game.cells, 0, game.player)
+game.makeMove(game.cells, 0, game.player)
 console.log(game)
-makeMove(game.cells, 2, game.player)
+game.makeMove(game.cells, 2, game.player)
 console.log(game)
-makeMove(game.cells, 3, game.player)
+game.makeMove(game.cells, 3, game.player)
 console.log(game)
-makeMove(game.cells, 5, game.player)
+game.makeMove(game.cells, 5, game.player)
 console.log(game)
-makeMove(game.cells, 4, game.player)
+game.makeMove(game.cells, 4, game.player)
 console.log(game)
-makeMove(game.cells, 8, game.player)
+game.makeMove(game.cells, 8, game.player)
 console.log(game)
-makeMove(game.cells, 7, game.player)
+game.makeMove(game.cells, 7, game.player)
 console.log(game)
-newGame(game)
+game.newGame(game)
 console.log(game)
 
 module.exports = {
