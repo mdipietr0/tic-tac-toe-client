@@ -25,6 +25,9 @@ const onSignInSuccess = function (response) {
   console.log(response.user.token)
   console.log('onSignInSuccess')
   store.user = response.user
+  $('#username').text(store.user.email)
+  $('#userLabel').text(store.user.email)
+  $('#username').removeClass('hidden')
   $('#loginModal').modal('hide')
   $('#sign-in input').val('')
   $('#register').addClass('hidden')
@@ -66,6 +69,7 @@ const onSignOutSuccess = function () {
   $('#game-list').addClass('hidden')
   $('#game-container').addClass('hidden')
   $('#winner-banner').addClass('hidden')
+  $('#username').addClass('hidden')
   $(`#counterX`).text(0)
   $(`#counterO`).text(0)
   store.user = {}

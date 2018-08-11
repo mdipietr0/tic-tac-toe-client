@@ -98,6 +98,42 @@ const onBoxClick = function (e) {
 const onMainMenu = function () {
   ui.onMainMenu()
 }
+
+const calculateStats = function (response) {
+  console.log('test')
+  let games = response.games
+  const gamesPlayed = games.length
+  // console.log(games)
+  console.log('games played : ' + gamesPlayed)
+  games = games.filter(game => {
+    const g = new Game(game)
+    console.log(g.over)
+    return g.over
+  })
+  const gamesFinished = games.length
+  console.log('games finished: ' + gamesFinished)
+  games = games.filter(game => {
+    const g = new Game(game)
+    return !g.isDraw()
+  })
+  const numDraw = gamesPlayed - games.length
+  console.log('Number of games draw: ' + numDraw)
+  games = games.filter(game => {
+    const g = new Game(game)
+    return g.getWinner() === 'x'
+  })
+  const gamesWon = games.length
+  console.log('Games won : ' + gamesWon)
+  // return games.length
+  ui.setStats(gamesPlayed, gamesFinished, numDraw, gamesWon)
+}
+
+const onWelcome = function () {
+  api.index()
+    .then(calculateStats)
+    // .then(ui.setStats)
+    .catch(ui.onGetAllGamesFailure)
+}
 const addHandlers = function () {
   console.log('game events addHandlers')
   $('#games-index').on('click', onGetAllGames)
@@ -109,6 +145,7 @@ const addHandlers = function () {
   $('#load-game').on('click', onGetAllGames)
   $('#game-list').on('click', 'button', onShowGame)
   $('#main-menu').on('click', onMainMenu)
+  $('#welcome').on('click', onWelcome)
 }
 
 module.exports = {

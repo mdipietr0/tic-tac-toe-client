@@ -117,9 +117,16 @@ const onDraw = function () {
 }
 
 const onMainMenu = function () {
-  $('#winner-banner').removeClass('hidden')
   $('#game-buttons').removeClass('hidden')
   $('#game-container').addClass('hidden')
+}
+
+const setStats = function (...stats) {
+  $('#total-games').text(stats[0])
+  $('#games-finished').text(stats[1])
+  $('#games-drew').text(stats[2])
+  $('#games-won').text(stats[3])
+  $('#games-lost').text(stats[1] - stats[2] - stats[3])
 }
 
 module.exports = {
@@ -134,5 +141,6 @@ module.exports = {
   onUpdateGameFailure,
   updateBoard,
   onWin,
-  onDraw
+  onDraw,
+  setStats
 }

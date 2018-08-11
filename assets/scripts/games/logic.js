@@ -13,6 +13,27 @@ const Game = function (game = {cells: ['', '', '', '', '', '', '', '', ''], over
   this.player = 'x'
 }
 
+const getWinner = function () {
+  let countX = 0
+  let countO = 0
+  this.cells.forEach(cell => {
+    if (cell === 'x') {
+      countX++
+    } else if (cell === 'o') {
+      countO++
+    }
+  })
+  console.log('x: ' + countX)
+  console.log('o:' + countX)
+  if (countX > countO) {
+    return 'x'
+  } else if (countO > countX) {
+    return 'o'
+  }
+}
+
+Game.prototype.getWinner = getWinner
+
 // const store = require('../store')
 // const board = []
 /**
@@ -23,7 +44,7 @@ const Game = function (game = {cells: ['', '', '', '', '', '', '', '', ''], over
  * @param {number} player
  *   player number: must be {1, 2}
  */
-const isGameOver = function () {
+const didWin = function () {
   console.log(this)
   if ((this.cells[0] !== '' && this.cells[0] === this.cells[1] && this.cells[1] === this.cells[2]) ||
   (this.cells[3] !== '' && this.cells[3] === this.cells[4] && this.cells[4] === this.cells[5]) ||
@@ -39,22 +60,31 @@ const isGameOver = function () {
   return false
 }
 
-Game.prototype.isGameOver = isGameOver
+Game.prototype.didWin = didWin
 
 const isDraw = function () {
-  if (this.cells.every(cell => cell !== '')) {
+  if (this.cells.every(cell => cell !== '') && !this.didWin()) {
     console.log('draw')
+    this.gameOver()
     return true
   }
   return false
 }
 
 Game.prototype.isDraw = isDraw
+
 const gameOver = function () {
   this.over = true
+  console.log('testing go')
 }
 
 Game.prototype.gameOver = gameOver
+
+const isGameOver = function () {
+  return this.over
+}
+
+Game.prototype.isGameOver = isGameOver
 
 /**
  * Checks if a square is available
@@ -88,6 +118,7 @@ const changePlayer = function () {
 Game.prototype.changePlayer = changePlayer
 
 const makeMove = function (index) {
+  console.log('makeMove')
   const data = {
     id: this.id,
     game: {
@@ -98,14 +129,11 @@ const makeMove = function (index) {
       over: false
     }
   }
-  console.log('makeMove')
-  if (!this.isGameOver() && this.isSquareAvailable(index)) {
+  if (this.isSquareAvailable(index)) {
     this.cells[index] = this.player
-    const go = this.isGameOver()
-    if (go) {
+    if (this.didWin() || this.isDraw()) {
       this.gameOver()
       data.game.over = true
-      console.log(this.player + 'WINS')
     }
     return data
   }
@@ -151,6 +179,7 @@ console.log(game)
 
 module.exports = {
   Game,
+  didWin,
   isGameOver,
   isSquareAvailable,
   drawBoard,
