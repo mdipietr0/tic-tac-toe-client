@@ -15,7 +15,8 @@ const onGetAllGames = function () {
     .catch(ui.onGetAllGamesFailure)
 }
 
-const onCreateGame = function () {
+const onCreateGame = function (e) {
+  e.preventDefault()
   console.log('game events onCreateGame')
   api.create()
     .then(function (response) {
