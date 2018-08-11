@@ -8,7 +8,8 @@ const {Game} = require('./logic')
 const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
 
-const onGetAllGames = function () {
+const onGetAllGames = function (e) {
+  e.preventDefault()
   console.log('game events onGetAllGames')
   api.index()
     .then(ui.onGetAllGamesSuccess)
@@ -103,7 +104,6 @@ const calculateStats = function (response) {
   console.log('test')
   let games = response.games
   const gamesPlayed = games.length
-  // console.log(games)
   console.log('games played : ' + gamesPlayed)
   games = games.filter(game => {
     const g = new Game(game)
@@ -116,7 +116,7 @@ const calculateStats = function (response) {
     const g = new Game(game)
     return !g.isDraw()
   })
-  const numDraw = gamesPlayed - games.length
+  const numDraw = gamesFinished - games.length
   console.log('Number of games draw: ' + numDraw)
   games = games.filter(game => {
     const g = new Game(game)
