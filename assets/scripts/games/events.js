@@ -148,6 +148,7 @@ const addHandlers = function () {
   $('#load-game').on('click', onGetAllGames)
   $('#game-list').on('click', 'button', onShowGame)
   $('#main-menu').on('click', onMainMenu)
+  $('.home').on('click', onMainMenu)
   $('#welcome').on('click', onWelcome)
 }
 
