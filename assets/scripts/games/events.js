@@ -4,6 +4,9 @@
 const ui = require('./ui')
 const api = require('./api')
 // const logic = require('./logic')
+const {resourceWatcher} = require('../resource-watcher')
+const config = require('../config')
+
 const {Game} = require('./logic')
 const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
@@ -137,14 +140,114 @@ const onWelcome = function () {
     // .then(ui.setStats)
     .catch(ui.onGetAllGamesFailure)
 }
+
+const onCreateMultiGame = function (e) {
+  e.preventDefault()
+  console.log('game events onCreateGame')
+  api.create()
+    .then(function (response) {
+      store.game = new Game(response.game)
+      console.log('Game object instance ', store.game)
+      console.log(store.game)
+      console.log(store.game.cells)
+      console.log('create game object')
+      const gameWatcher = resourceWatcher(config.apiUrl + 'games/' + store.game.id + '/watch', {
+        Authorization: 'Token token=' + store.user.token
+      })
+      gameWatcher.on('change', function (data) {
+        console.log(data)
+        if (data.game && data.game.cells) {
+          store.game.cells = data.game.cells[1]
+          ui.updateBoard(store.game.cells)
+          // const diff = changes => {
+          //   const before = changes[0]
+          //   const after = changes[1]
+          //   for (let i = 0; i < after.length; i++) {
+          //     if (before[i] !== after[i]) {
+          //       return {
+          //         index: i,
+          //         value: after[i]
+          //       }
+          //     }
+          //   }
+          //
+          //   return { index: -1, value: '' }
+          // }
+          //
+          // const cell = diff(data.game.cells)
+          // $('#watch-index').val(cell.index)
+          // $('#watch-value').val(cell.value)
+        } else if (data.timeout) { // not an error
+          gameWatcher.close()
+        }
+      })
+
+      gameWatcher.on('error', function (e) {
+        console.error('an error has occurred with the stream', e)
+      })
+    })
+    .then(ui.onCreateGameSuccess)
+    .catch(ui.onCreateGameFailure)
+}
+
+const onJoinGame = function (e) {
+  e.preventDefault()
+  const data = getFormFields(e.target)
+  api.update(data)
+    .then(function (response) {
+      console.log(response)
+      store.game = new Game(response.game)
+      store.game.player = 'o'
+      ui.updateBoard(store.game.cells)
+      const gameWatcher = resourceWatcher(config.apiUrl + 'games/' + store.game.id + '/watch', {
+        Authorization: 'Token token=' + store.user.token
+      })
+      gameWatcher.on('change', function (data) {
+        console.log(data)
+        if (data.game && data.game.cells) {
+          store.game.cells = data.game.cells[1]
+          ui.updateBoard(store.game.cells)
+          // const diff = changes => {
+          //   const before = changes[0]
+          //   const after = changes[1]
+          //   for (let i = 0; i < after.length; i++) {
+          //     if (before[i] !== after[i]) {
+          //       return {
+          //         index: i,
+          //         value: after[i]
+          //       }
+          //     }
+          //   }
+          //
+          //   return { index: -1, value: '' }
+          // }
+          //
+          // const cell = diff(data.game.cells)
+          // $('#watch-index').val(cell.index)
+          // $('#watch-value').val(cell.value)
+        } else if (data.timeout) { // not an error
+          gameWatcher.close()
+        }
+      })
+
+      gameWatcher.on('error', function (e) {
+        console.error('an error has occurred with the stream', e)
+      })
+    })
+    .then(ui.onShowGameSuccess)
+    .catch(ui.onShowGameFailure)
+}
+
 const addHandlers = function () {
   console.log('game events addHandlers')
+  $('#games-join').on('submit', onJoinGame)
   $('#games-index').on('click', onGetAllGames)
   $('#games-create').on('click', onCreateGame)
   // $('#games-show').on('submit', onShowGame)
   $('#games-update').on('submit', onUpdateGame)
   $('.box').on('click', onBoxClick)
   $('#new-game').on('click', onCreateGame)
+  $('#new-multiplayer-game').on('click', onCreateMultiGame)
   $('#load-game').on('click', onGetAllGames)
   $('#game-list').on('click', 'button', onShowGame)
   $('#main-menu').on('click', onMainMenu)
