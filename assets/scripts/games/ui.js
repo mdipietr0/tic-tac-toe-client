@@ -40,6 +40,11 @@ const changeTurn = function () {
   yourTurn.text(text)
 }
 
+const displayWaiting = function () {
+  $('.your-turn').addClass('hidden')
+  $('.waiting').removeClass('hidden')
+}
+
 const onGetAllGamesSuccess = function (response) {
   console.log('onGetAllGamesSuccess')
   // flash(true, 'Get all games successful')
@@ -160,5 +165,6 @@ module.exports = {
   onWin,
   onDraw,
   setStats,
-  changeTurn
+  changeTurn,
+  displayWaiting
 }

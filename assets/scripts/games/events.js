@@ -6,7 +6,6 @@ const api = require('./api')
 // const logic = require('./logic')
 const {resourceWatcher} = require('../resource-watcher')
 const config = require('../config')
-
 const {Game} = require('./logic')
 const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
@@ -71,6 +70,8 @@ const onUpdateGame = function (e) {
 }
 
 const checkForWinner = function () {
+  console.log('checking for winner')
+  console.log(store.game)
   if (store.game.isDraw()) {
     ui.onDraw()
   } else if (store.game.over) {
@@ -89,15 +90,29 @@ const updateBoard = function (response) {
 }
 
 const onBoxClick = function (e) {
+  if (store.isWaiting) {
+    return
+  }
   const squareNum = getSquareNum(e.target)
   const data = store.game.makeMove(squareNum)
   if (data) {
     api.update(data)
       .then(updateBoard)
-      .then(ui.changeTurn)
+      .then(function () {
+        if (store.gameWatcher === undefined) {
+          ui.changeTurn()
+        } else {
+          store.isWaiting = true
+        }
+      })
       .then(ui.onUpdateGameSuccess)
       .then(checkForWinner)
-      .then(store.game.changePlayer.bind(store.game))
+      .then(function () {
+        if (store.gameWatcher === undefined) {
+          // store.game.changePlayer.bind(store.game)
+          store.game.changePlayer()
+        }
+      })
       .catch(ui.onUpdateGameFailure)
   }
 }
@@ -141,9 +156,54 @@ const onWelcome = function () {
     .catch(ui.onGetAllGamesFailure)
 }
 
+const startWatcher = function () {
+  store.gameWatcher = resourceWatcher(config.apiUrl + 'games/' + store.game.id + '/watch', {
+    Authorization: 'Token token=' + store.user.token
+  })
+  store.gameWatcher.on('change', function (data) {
+    console.log('game watcher data : ')
+    console.log(data)
+    if (data.game && data.game.cells) {
+      store.isWaiting = false
+      console.log('isWaiting : ' + store.isWaiting)
+      store.game.cells = data.game.cells[1]
+      ui.updateBoard(store.game.cells)
+      ui.onUpdateGameSuccess()
+      if (store.game.didWin() || store.game.isDraw()) {
+        store.game.gameOver()
+        store.game.over = true
+      }
+      checkForWinner()
+      // const diff = changes => {
+      //   const before = changes[0]
+      //   const after = changes[1]
+      //   for (let i = 0; i < after.length; i++) {
+      //     if (before[i] !== after[i]) {
+      //       return {
+      //         index: i,
+      //         value: after[i]
+      //       }
+      //     }
+      //   }
+      //
+      //   return { index: -1, value: '' }
+      // }
+      //
+      // const cell = diff(data.game.cells)
+      // $('#watch-index').val(cell.index)
+      // $('#watch-value').val(cell.value)
+    } else if (data.timeout) { // not an error
+      store.gameWatcher.close()
+    }
+  })
+  store.gameWatcher.on('error', function (e) {
+    console.error('an error has occurred with the stream', e)
+  })
+}
+
 const onCreateMultiGame = function (e) {
   e.preventDefault()
-  console.log('game events onCreateGame')
+  console.log('game events onCreateMultiGame')
   api.create()
     .then(function (response) {
       store.game = new Game(response.game)
@@ -151,40 +211,8 @@ const onCreateMultiGame = function (e) {
       console.log(store.game)
       console.log(store.game.cells)
       console.log('create game object')
-      const gameWatcher = resourceWatcher(config.apiUrl + 'games/' + store.game.id + '/watch', {
-        Authorization: 'Token token=' + store.user.token
-      })
-      gameWatcher.on('change', function (data) {
-        console.log(data)
-        if (data.game && data.game.cells) {
-          store.game.cells = data.game.cells[1]
-          ui.updateBoard(store.game.cells)
-          // const diff = changes => {
-          //   const before = changes[0]
-          //   const after = changes[1]
-          //   for (let i = 0; i < after.length; i++) {
-          //     if (before[i] !== after[i]) {
-          //       return {
-          //         index: i,
-          //         value: after[i]
-          //       }
-          //     }
-          //   }
-          //
-          //   return { index: -1, value: '' }
-          // }
-          //
-          // const cell = diff(data.game.cells)
-          // $('#watch-index').val(cell.index)
-          // $('#watch-value').val(cell.value)
-        } else if (data.timeout) { // not an error
-          gameWatcher.close()
-        }
-      })
-
-      gameWatcher.on('error', function (e) {
-        console.error('an error has occurred with the stream', e)
-      })
+      store.isWaiting = false
+      startWatcher()
     })
     .then(ui.onCreateGameSuccess)
     .catch(ui.onCreateGameFailure)
@@ -198,41 +226,16 @@ const onJoinGame = function (e) {
       console.log(response)
       store.game = new Game(response.game)
       store.game.player = 'o'
+      ui.changeTurn()
+      store.isWaiting = true
+      const currentPlayer = store.game.getCurrentPlayer()
+      if (currentPlayer === store.game.player) {
+        store.isWaiting = false
+      } else {
+        ui.displayWaiting()
+      }
       ui.updateBoard(store.game.cells)
-      const gameWatcher = resourceWatcher(config.apiUrl + 'games/' + store.game.id + '/watch', {
-        Authorization: 'Token token=' + store.user.token
-      })
-      gameWatcher.on('change', function (data) {
-        console.log(data)
-        if (data.game && data.game.cells) {
-          store.game.cells = data.game.cells[1]
-          ui.updateBoard(store.game.cells)
-          // const diff = changes => {
-          //   const before = changes[0]
-          //   const after = changes[1]
-          //   for (let i = 0; i < after.length; i++) {
-          //     if (before[i] !== after[i]) {
-          //       return {
-          //         index: i,
-          //         value: after[i]
-          //       }
-          //     }
-          //   }
-          //
-          //   return { index: -1, value: '' }
-          // }
-          //
-          // const cell = diff(data.game.cells)
-          // $('#watch-index').val(cell.index)
-          // $('#watch-value').val(cell.value)
-        } else if (data.timeout) { // not an error
-          gameWatcher.close()
-        }
-      })
-
-      gameWatcher.on('error', function (e) {
-        console.error('an error has occurred with the stream', e)
-      })
+      startWatcher()
     })
     .then(ui.onShowGameSuccess)
     .catch(ui.onShowGameFailure)
