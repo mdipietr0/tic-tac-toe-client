@@ -104,8 +104,34 @@ h1 {
 .stat-header {
   text-align: center;
 }
+.navbar-inverse {
+  background-color: #0C2340;
+}
 
+.vs {
+  margin: 20px;
+}
 
+.btn-primary {
+  background-color: #0C2340;
+}
+
+.btn-primary:hover {
+  background-color: #BD3039;
+}
+
+.title {
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 5%;
+  height: 5%;
+}
+
+.title-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
 @media(max-width: 414px) {
   .player-counter {
     display: none;
