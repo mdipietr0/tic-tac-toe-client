@@ -133,6 +133,12 @@ h1 {
   justify-content: center;
 }
 @media(max-width: 414px) {
+  .title {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 15%;
+    height: 15%;
+  }
   .player-counter {
     display: none;
   }
