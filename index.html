@@ -117,9 +117,17 @@
       <button id="new-game" class="btn btn-primary col-md-offset-3 col-md-6 game-button form-control">New Game</button>
     </div>
     <div class="form group">
+      <button id="new-multiplayer-game" class="btn btn-primary col-md-offset-3 col-md-6 game-button form-control">New Multiplayer Game</button>
+    </div>
+    <div class="form group">
       <button id="load-game" class="btn btn-primary col-md-offset-3 col-md-6 game-button form-control">Load Game</button>
     </div>
     </form>
+    <form id="games-join">
+      <input name="id" type="text" placeholder="ID">
+      <button>Join game</button>
+    </form>
+
   </div>
   <div id="game-list" class="align-center hidden"></div>
   <!-- <div class="container game-button-container">
@@ -253,13 +261,16 @@
       <div id="player-o-wins" class="player-counter">Player O Wins:<br><span class="counter" id="counterO">0</span></div>
     </div>
 
+
+
+
     <!-- <button id="games-index">Get all games</button>
     <button id="games-create">Create game</button>
     <form id="games-show">
       <input type="number" name="id" placeholder="ID">
       <button>Show game</button>
-    </form>
-
+    </form>-->
+    <!--
     <form id="games-update">
       <input name="id" type="text" placeholder="ID">
       <input name="game[cell][index]" type="text" placeholder="Index">
