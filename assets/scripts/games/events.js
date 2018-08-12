@@ -44,6 +44,7 @@ const onShowGame = function (e) {
   api.show(id)
     .then(function (response) {
       store.game = new Game(response.game)
+      store.game.getCurrentPlayer()
       ui.updateBoard(store.game.cells)
     })
     .then(ui.onShowGameSuccess)
@@ -60,6 +61,7 @@ const onUpdateGame = function (e) {
     .then(function (response) {
       store.game = new Game(response.game)
       ui.updateBoard(store.game.cells)
+      ui.changeTurn()
     })
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
@@ -89,6 +91,7 @@ const onBoxClick = function (e) {
   if (data) {
     api.update(data)
       .then(updateBoard)
+      .then(ui.changeTurn)
       .then(ui.onUpdateGameSuccess)
       .then(checkForWinner)
       .then(store.game.changePlayer.bind(store.game))

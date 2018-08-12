@@ -13,6 +13,15 @@ const Game = function (game = {cells: ['', '', '', '', '', '', '', '', ''], over
   this.player = 'x'
 }
 
+const getCurrentPlayer = function () {
+  const lastPlayer = this.getWinner()
+  if (lastPlayer === 'x') {
+    this.player = 'o'
+  }
+}
+
+Game.prototype.getCurrentPlayer = getCurrentPlayer
+
 const getWinner = function () {
   let countX = 0
   let countO = 0

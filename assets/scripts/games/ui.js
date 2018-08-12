@@ -19,7 +19,6 @@ const updateBoard = function (cells) {
       $(`#box-${i}`).find('.token').removeClass('hidden')
     }
   })
-  changeTurn()
 }
 
 const changeTurn = function () {
@@ -142,5 +141,6 @@ module.exports = {
   updateBoard,
   onWin,
   onDraw,
-  setStats
+  setStats,
+  changeTurn
 }
