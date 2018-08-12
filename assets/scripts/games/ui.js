@@ -15,7 +15,16 @@ const updateBoard = function (cells) {
   cells.forEach((cell, i) => {
     console.log(i + ' ' + cell)
     if (cell !== '') {
-      $(`#box-${i}`).find('.token').text(cell.toUpperCase())
+      // update to show image
+      let html
+      // const redSox = "https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png"
+      // const yankees = "https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/new_york_yankees_logo.png"
+      if (cell === 'x') {
+        html = `<img class="logo-token" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png">`
+      } else {
+        html = `<img class="logo-token" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/new_york_yankees_logo.png">`
+      }
+      $(`#box-${i}`).find('.token').html(html)
       $(`#box-${i}`).find('.token').removeClass('hidden')
     }
   })
@@ -100,7 +109,7 @@ const onWin = function (winner) {
     winCount += 1
     console.log(winCount)
     $(`#counter${winner}`).text(winCount)
-    $('#winner-banner').text(`${winner} Wins!!!`)
+    $('#winner-banner').text(`${winner === 'X' ? 'Red Sox' : 'Yankees'} Win!!!`)
     $('#winner-banner').removeClass('hidden')
     $('#game-buttons').removeClass('hidden')
     $('#main-menu').addClass('hidden')
@@ -111,7 +120,7 @@ const onWin = function (winner) {
 const onDraw = function () {
   setTimeout(function () {
     console.log('game over, Draw')
-    $('#winner-banner').text(`Draw`)
+    $('#winner-banner').text(`Extra Innings!!`)
     $('#winner-banner').removeClass('hidden')
     $('#main-menu').addClass('hidden')
     $('#game-buttons').removeClass('hidden')
