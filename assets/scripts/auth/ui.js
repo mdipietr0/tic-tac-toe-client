@@ -74,8 +74,8 @@ const onSignOutSuccess = function () {
   $(`#counterO`).text(0)
   store.user = {}
   for (let i = 0; i < 9; i++) {
-    $(`#box-${i + 1}`).find('.token').text('')
-    $(`#box-${i + 1}`).find('.token').addClass('hidden')
+    $(`#box-${i}`).find('.token').text('')
+    $(`#box-${i}`).find('.token').addClass('hidden')
   }
   flash(true, 'Successfully signed out!')
 }
