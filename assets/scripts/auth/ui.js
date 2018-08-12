@@ -72,6 +72,7 @@ const onSignOutSuccess = function () {
   $('#username').addClass('hidden')
   $(`#counterX`).text(0)
   $(`#counterO`).text(0)
+  $(`#main-menu`).addClass('hidden')
   store.user = {}
   for (let i = 0; i < 9; i++) {
     $(`#box-${i}`).find('.token').text('')

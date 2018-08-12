@@ -41,6 +41,7 @@ const onGetAllGamesSuccess = function (response) {
   }, html)
   $('#game-list').html(html)
   $('#game-list').removeClass('hidden')
+  $('#main-menu').removeClass('hidden')
   $('#game-buttons').addClass('hidden')
   $('#winner-banner').addClass('hidden')
 }
@@ -57,6 +58,7 @@ const onCreateGameSuccess = function () {
     $('#winner-banner').addClass('hidden')
     $('#game-container').removeClass('hidden')
     $('#game-buttons').addClass('hidden')
+    $('#main-menu').removeClass('hidden')
   }, 500)
   clearBoard()
 }
@@ -101,6 +103,7 @@ const onWin = function (winner) {
     $('#winner-banner').text(`${winner} Wins!!!`)
     $('#winner-banner').removeClass('hidden')
     $('#game-buttons').removeClass('hidden')
+    $('#main-menu').addClass('hidden')
     $('#game-container').addClass('hidden')
   }, 300)
 }
@@ -110,6 +113,7 @@ const onDraw = function () {
     console.log('game over, Draw')
     $('#winner-banner').text(`Draw`)
     $('#winner-banner').removeClass('hidden')
+    $('#main-menu').addClass('hidden')
     $('#game-buttons').removeClass('hidden')
     $('#game-container').addClass('hidden')
   }, 300)
@@ -118,6 +122,9 @@ const onDraw = function () {
 const onMainMenu = function () {
   $('#game-buttons').removeClass('hidden')
   $('#game-container').addClass('hidden')
+  $('#game-list').addClass('hidden')
+  $('#main-menu').addClass('hidden')
+  $('#winner-banner').addClass('hidden')
 }
 
 const setStats = function (...stats) {
