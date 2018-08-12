@@ -44,7 +44,7 @@ body {
 }
 
 .banner {
-  font-size: 48px;
+  font-size: 18px;
   color: $success-color;
   padding: 10px;
   text-align: center
@@ -103,4 +103,45 @@ h1 {
 
 .stat-header {
   text-align: center;
+}
+
+
+@media(max-width: 414px) {
+  .player-counter {
+    display: none;
+  }
+  .game-button-container {
+    width: 300px;
+  }
+  .board {
+    margin: auto;
+    margin-top: 15px;
+    width: 300px;
+  }
+  .token {
+    font-size: 64px;
+  }
+  .box {
+    background-color: white;
+    height: 100px;
+    text-align: center;
+  }
+  .counter {
+    font-size: 16px;
+  }
+  .border-bottom {
+    border-bottom: solid 1px grey;
+  }
+
+  .border-top {
+    border-top: solid 1px grey;
+  }
+
+  .border-right {
+    border-right: solid 1px grey;
+  }
+
+  .border-left {
+    border-left: solid 1px grey;
+  }
 }
