@@ -81,6 +81,8 @@ const onShowGameSuccess = function (response) {
   console.log('onShowGameSuccess')
   // flash(true, 'Show game successful')
   $('#game-list').addClass('hidden')
+  $('#game-buttons').addClass('hidden')
+  $('#winner-banner').addClass('hidden')
   // updateBoard()
   $('#game-container').removeClass('hidden')
 }
