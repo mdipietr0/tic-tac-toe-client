@@ -74,8 +74,16 @@ const checkForWinner = function () {
   console.log(store.game)
   if (store.game.isDraw()) {
     ui.onDraw()
+    if (store.gameWatcher) {
+      // debugger
+      store.gameWatcher.close()
+    }
   } else if (store.game.over) {
     ui.onWin(store.game.player)
+    if (store.gameWatcher) {
+      // debugger
+      store.gameWatcher.close()
+    }
   }
 }
 
