@@ -36,6 +36,7 @@ const onSignInSuccess = function (response) {
   $('#change-password-btn').removeClass('hidden')
   $('#game-buttons').removeClass('hidden')
   $('.home').removeClass('hidden')
+  $('.landing-container').addClass('hidden')
   // $('#game-container').removeClass('hidden')
   // flash(true, 'Successfully signed in!')
 }
@@ -75,6 +76,7 @@ const onSignOutSuccess = function () {
   $(`#counterO`).text(0)
   $(`#main-menu`).addClass('hidden')
   $('.home').addClass('hidden')
+  $('.landing-container').removeClass('hidden')
   store.user = {}
   for (let i = 0; i < 9; i++) {
     $(`#box-${i}`).find('.token').text('')

@@ -58,6 +58,11 @@ h1 {
   text-align: center;
 }
 
+.landing-subtitle {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .board {
   margin: auto;
   margin-top: 30px;
@@ -96,6 +101,10 @@ h1 {
 
 .game-button-container {
   width: 500px;
+}
+
+.login-button-container {
+  width: 350px;
 }
 
 .btn-select-game {
@@ -154,6 +163,15 @@ h1 {
   margin-bottom: auto;
   width: 50%;
   height: 50%;
+}
+
+.instruction-container {
+  display: flex;
+  justify-content: center;
+}
+
+.instructions {
+  margin-top: 50px;
 }
 
 .title-container {
