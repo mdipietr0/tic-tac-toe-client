@@ -1,6 +1,7 @@
 'use strict'
 
 const {flash} = require('../templates/helpers/flash.js')
+const config = require('../config')
 // const store = require('../store')
 // const logic = require('./logic')
 
@@ -17,12 +18,10 @@ const updateBoard = function (cells) {
     if (cell !== '') {
       // update to show image
       let html
-      // const redSox = "https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png"
-      // const yankees = "https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/new_york_yankees_logo.png"
       if (cell === 'x') {
-        html = `<img class="logo-token" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png">`
+        html = `<img class="logo-token" src="${config.imgUrls.player1}">`
       } else {
-        html = `<img class="logo-token" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/new_york_yankees_logo.png">`
+        html = `<img class="logo-token" src="${config.imgUrls.player2}">`
       }
       $(`#box-${i}`).find('.token').html(html)
       $(`#box-${i}`).find('.token').removeClass('hidden')
@@ -32,11 +31,19 @@ const updateBoard = function (cells) {
 
 const changeTurn = function () {
   const yourTurn = $('.your-turn')
+  console.log('your-turn = ' + yourTurn)
   let player = yourTurn.attr('data-player')
+  console.log('data-player = ' + player)
   player = player === 'X' ? 'O' : 'X'
   yourTurn.attr('data-player', player)
-  let text = yourTurn.text()
-  text = text.slice(0, text.length - 1) + player
+  console.log('player = ' + player)
+  let text // = yourTurn.text()
+  // text = text.slice(0, text.length - 1) + player
+  if (player === 'O') {
+    text = `${config.teamNames[config.teamNames.player2]} are up to bat!`
+  } else if (player === 'X') {
+    text = `${config.teamNames[config.teamNames.player1]} are up to bat!`
+  }
   yourTurn.text(text)
 }
 
@@ -60,8 +67,15 @@ const onGetAllGamesFailure = function () {
   flash(false, 'Get all games failure')
 }
 
+const initYourTurn = function () {
+  console.log(config.teamNames[config.teamNames.player1])
+  $('.your-turn').attr('data-player', 'X')
+  $('.your-turn').text(`${config.teamNames[config.teamNames.player1]} are up to bat!`)
+}
+
 const onCreateGameSuccess = function () {
   console.log('onCreateGameSuccess')
+  initYourTurn()
   // flash(true, 'Create game successful')
   setTimeout(function () {
     $('#winner-banner').addClass('hidden')
@@ -109,7 +123,7 @@ const onWin = function (winner) {
     winCount += 1
     console.log(winCount)
     $(`#counter${winner}`).text(winCount)
-    $('#winner-banner').text(`${winner === 'X' ? 'Red Sox' : 'Yankees'} Win!!!`)
+    $('#winner-banner').text(`${winner === 'X' ? config.teamNames[config.teamNames.player1] : config.teamNames[config.teamNames.player1]} Win!!!`)
     $('#winner-banner').removeClass('hidden')
     $('#game-buttons').removeClass('hidden')
     $('#main-menu').addClass('hidden')

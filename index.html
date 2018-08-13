@@ -103,9 +103,9 @@
 
   <h1>Tic Tac Toe</h1>
   <div class="title-container">
-    <img class="title" data-team="redSox" data-toggle="modal" data-target="#teamModal" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png">
+    <img alt="player-1-logo" class="title" data-player="1" data-toggle="modal" data-target="#teamModal" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png">
       <h2 class="vs">vs.</h2>
-    <img class="title" data-team="yankees" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/new_york_yankees_logo.png">
+    <img alt="player-2-logo" class="title" data-player="2" data-toggle="modal" data-target="#teamModal" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/new_york_yankees_logo.png">
   </div>
     <div>
     <h4 id="auth-flash"></h4>
@@ -135,10 +135,9 @@
           <h4 class="modal-title">Select Team</h4>
         </div>
         <div class="modal-body">
-          <h4 class="stat-header">Teams:</h4>
-            <h5 class="select-team">Red Sox</h5>
-            <h5 class="select-team">Yankees</h5>
-          <!-- TODO dynamically add all teams to select from -->
+          <h4 class="team-header">Teams:</h4>
+          <div class="select-team-container"></div>
+              <!-- TODO dynamically add all teams to select from -->
           <button class="btn btn-block btn-default" type="submit" data-target="#statsModal" data-dismiss="modal">Ok</button>
         </div>
       </div><!-- /.modal-content -->
@@ -249,7 +248,7 @@
   </div><!-- /.modal -->
 
   <div id="game-container" class="container hidden">
-    <h4 class="your-turn" data-player="X">Your turn Player X</h4>
+    <h4 class="your-turn" data-player="X"></h4>
     <div class="counter-box">
       <div id="player-x-wins" class="player-counter">Player X Wins:<br><span class="counter" id="counterX">0</span></div>
       <div id="game-board" class="board">

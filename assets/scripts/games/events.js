@@ -141,14 +141,51 @@ const onWelcome = function () {
 
 const onLogo = function (e) {
   console.log(e.target)
-  const team = $(this).attr('data-team')
-  console.log(team)
-  $(this).attr('src', config.imgUrls.team)
+  const player = $(this).attr('data-player')
+  console.log(player)
+  $('#teamModal').attr('data-player', player)
 }
 
 const onTeamSelect = function (e) {
-  console.log('test team select')
+  const team = $(this).attr('data-team')
+  console.log(`test ${team} select`)
+  const player = $('#teamModal').attr(`data-player`)
+  console.log(player)
+  console.log(config.imgUrls[team])
+  $(`img[data-player="${player}"]`).attr(`src`, config.imgUrls[team])
+  setTeamToken(team, player)
 }
+
+const setTeamToken = function (team, player) {
+  console.log('setTeamToken')
+  if (player === '1') {
+    console.log('player : ' + player)
+    console.log('player : ' + team)
+    config.imgUrls.player1 = config.imgUrls[team]
+    config.teamNames.player1 = team
+  }
+  config.imgUrls.player2 = config.imgUrls[team]
+  config.teamNames.player2 = team
+}
+
+const loadTeams = function () {
+  let html
+  for (const imgName in config.imgUrls) {
+    if (imgName === 'player1' || imgName === 'player2') {
+      // console.log('do nothing')
+      // console.log(imgName)
+      // console.log(config.imgUrls[imgName])
+    } else {
+      const image = config.imgUrls[imgName]
+      console.log('load team ' + image)
+      html += `<h5 data-team="${imgName}" class="select-team">${config.teamNames[imgName]}<span><img class="tiny-icon" src="${image}"  alt="team-logo"></span></h5>
+      `
+    }
+  }
+  $('.select-team-container').append(html)
+}
+
+loadTeams()
 
 const addHandlers = function () {
   console.log('game events addHandlers')
