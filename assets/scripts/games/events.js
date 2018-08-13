@@ -147,7 +147,7 @@ const onLogo = function (e) {
 }
 
 const onTeamSelect = function (e) {
-  //
+  console.log('test team select')
 }
 
 const addHandlers = function () {
