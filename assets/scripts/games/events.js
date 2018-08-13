@@ -137,6 +137,11 @@ const onWelcome = function () {
     // .then(ui.setStats)
     .catch(ui.onGetAllGamesFailure)
 }
+
+const onLogo = function (e) {
+  console.log(e.target)
+}
+
 const addHandlers = function () {
   console.log('game events addHandlers')
   $('#games-index').on('click', onGetAllGames)
@@ -150,6 +155,7 @@ const addHandlers = function () {
   $('#main-menu').on('click', onMainMenu)
   $('.home').on('click', onMainMenu)
   $('#welcome').on('click', onWelcome)
+  $('.title').on('click', onLogo)
 }
 
 module.exports = {
