@@ -123,7 +123,7 @@ const onWin = function (winner) {
     winCount += 1
     console.log(winCount)
     $(`#counter${winner}`).text(winCount)
-    $('#winner-banner').text(`${winner === 'X' ? config.teamNames[config.teamNames.player1] : config.teamNames[config.teamNames.player1]} Win!!!`)
+    $('#winner-banner').text(`${winner === 'X' ? config.teamNames[config.teamNames.player1] : config.teamNames[config.teamNames.player2]} Win!!!`)
     $('#winner-banner').removeClass('hidden')
     $('#game-buttons').removeClass('hidden')
     $('#main-menu').addClass('hidden')

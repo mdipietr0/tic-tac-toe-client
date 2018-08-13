@@ -37,6 +37,8 @@ const onSignInSuccess = function (response) {
   $('#game-buttons').removeClass('hidden')
   $('.home').removeClass('hidden')
   $('.landing-container').addClass('hidden')
+  $('#title-logo').addClass('hidden')
+  $('.menu-container').removeClass('hidden')
   // $('#game-container').removeClass('hidden')
   // flash(true, 'Successfully signed in!')
 }
@@ -62,6 +64,7 @@ const onChangePasswordFailure = function () {
 
 const onSignOutSuccess = function () {
   console.log('onSignOutSuccess')
+  $('#title-logo').removeClass('hidden')
   $('#register').removeClass('hidden')
   $('#login').removeClass('hidden')
   $('#sign-out').addClass('hidden')
@@ -77,12 +80,13 @@ const onSignOutSuccess = function () {
   $(`#main-menu`).addClass('hidden')
   $('.home').addClass('hidden')
   $('.landing-container').removeClass('hidden')
+  $('.menu-container').addClass('hidden')
   store.user = {}
   for (let i = 0; i < 9; i++) {
     $(`#box-${i}`).find('.token').text('')
     $(`#box-${i}`).find('.token').addClass('hidden')
   }
-  flash(true, 'Successfully signed out!')
+  // flash(true, 'Successfully signed out!')
 }
 
 const onSignOutFailure = function () {

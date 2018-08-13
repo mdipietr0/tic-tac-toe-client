@@ -163,13 +163,14 @@ const setTeamToken = function (team, player) {
     console.log('player : ' + team)
     config.imgUrls.player1 = config.imgUrls[team]
     config.teamNames.player1 = team
+  } else {
+    config.imgUrls.player2 = config.imgUrls[team]
+    config.teamNames.player2 = team
   }
-  config.imgUrls.player2 = config.imgUrls[team]
-  config.teamNames.player2 = team
 }
 
 const loadTeams = function () {
-  let html
+  let html = ''
   for (const imgName in config.imgUrls) {
     if (imgName === 'player1' || imgName === 'player2') {
       // console.log('do nothing')
@@ -177,8 +178,9 @@ const loadTeams = function () {
       // console.log(config.imgUrls[imgName])
     } else {
       const image = config.imgUrls[imgName]
+      console.log(imgName)
       console.log('load team ' + image)
-      html += `<h5 data-team="${imgName}" class="select-team">${config.teamNames[imgName]}<span><img class="tiny-icon" src="${image}"  alt="team-logo"></span></h5>
+      html += `<h5 data-team="${imgName}" class="select-team" data-toggle="modal" data-target="#teamModal" >${config.teamNames[imgName]}<span><img class="tiny-icon" src="${image}"  alt="team-logo"></span></h5>
       `
     }
   }

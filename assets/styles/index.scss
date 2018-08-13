@@ -1,6 +1,6 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
-
+@import url('https://fonts.googleapis.com/css?family=Playball');
 $success-color: #5cb85c;
 $failure-color: #f00;
 $white: #fff;
@@ -54,7 +54,13 @@ body {
   text-align: center
 }
 
+.playball {
+  font-family: 'Playball';
+  font-size: 2em;
+}
+
 h1 {
+  font-size: 36px;
   text-align: center;
 }
 
@@ -178,6 +184,7 @@ h1 {
   display: flex;
   align-content: center;
   justify-content: center;
+  margin-top: 50px;
 }
 @media(max-width: 414px) {
   .title {
@@ -186,10 +193,23 @@ h1 {
     width: 15%;
     height: 15%;
   }
+  .logo-instructions {
+    margin-top: 0px;
+    text-align: center;
+  }
+  .instructions {
+    margin-top: 10px;
+  }
   .player-counter {
     display: none;
   }
+  .game-button {
+    margin: 10px auto;
+  }
   .game-button-container {
+    width: 300px;
+  }
+  .login-button-container {
     width: 300px;
   }
   .game-button-main {
