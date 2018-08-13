@@ -6,6 +6,7 @@ const api = require('./api')
 // const logic = require('./logic')
 const {Game} = require('./logic')
 const store = require('../store')
+const config = require('../config')
 const getFormFields = require('../../../lib/get-form-fields')
 
 const onGetAllGames = function (e) {
@@ -140,6 +141,13 @@ const onWelcome = function () {
 
 const onLogo = function (e) {
   console.log(e.target)
+  const team = $(this).attr('data-team')
+  console.log(team)
+  $(this).attr('src', config.imgUrls.team)
+}
+
+const onTeamSelect = function (e) {
+  //
 }
 
 const addHandlers = function () {
@@ -156,6 +164,7 @@ const addHandlers = function () {
   $('.home').on('click', onMainMenu)
   $('#welcome').on('click', onWelcome)
   $('.title').on('click', onLogo)
+  $('.select-team').on('click', onTeamSelect)
 }
 
 module.exports = {
