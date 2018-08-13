@@ -21,7 +21,7 @@ const imgUrls = {
   tigers: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/tigers_logo.jpg`,
   astros: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/astros_logo.jpg`,
   royals: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/kansas_city_royals-768x888.png`,
-  angers: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/angels_logo.jpg`,
+  angels: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/angels_logo.jpg`,
   dodgers: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/dodgers_cap_logo.png`,
   marlins: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/marlins_logo_colors.png`,
   brewers: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/milwaukee_brewers_logo.png`,

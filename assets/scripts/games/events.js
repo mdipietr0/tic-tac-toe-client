@@ -163,11 +163,11 @@ const setTeamToken = function (team, player) {
     console.log('player : ' + team)
     config.imgUrls.player1 = config.imgUrls[team]
     config.teamNames.player1 = team
-    $('#player-x-wins').text(config.teamNames[config.teamNames.player1] + ' Wins:')
+    $('#player-x-wins').html(config.teamNames[config.teamNames.player1] + ' Wins:<br>')
   } else {
     config.imgUrls.player2 = config.imgUrls[team]
     config.teamNames.player2 = team
-    $('#player-o-wins').text(config.teamNames[config.teamNames.player2] + ' Wins:')
+    $('#player-o-wins').html(config.teamNames[config.teamNames.player2] + ' Wins:<br>')
   }
 }
 
