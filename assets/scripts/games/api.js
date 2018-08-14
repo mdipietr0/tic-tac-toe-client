@@ -2,6 +2,7 @@
 
 const {apiUrl} = require('../config')
 const store = require('../store')
+const {console} = require('../config')
 
 const index = function () {
   console.log('games api index')

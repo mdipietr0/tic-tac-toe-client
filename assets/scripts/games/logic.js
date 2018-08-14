@@ -1,5 +1,7 @@
 'use strict'
 
+const {console} = require('../config')
+
 // const store = require('../store')
 
 const Game = function (game = {cells: ['', '', '', '', '', '', '', '', ''], over: false}) {

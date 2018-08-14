@@ -2,6 +2,7 @@
 const getFormFields = require('../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
+const {console} = require('../config')
 
 const onSignUp = function (e) {
   console.log('events onSignUp!')

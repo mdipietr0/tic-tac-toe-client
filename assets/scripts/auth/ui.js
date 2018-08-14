@@ -2,6 +2,7 @@
 
 const store = require('../store')
 const {flash} = require('../templates/helpers/flash')
+const {console} = require('../config')
 
 const onSignUpSuccess = function () {
   console.log('onSignUpSuccess')

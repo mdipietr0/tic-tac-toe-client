@@ -7,6 +7,7 @@ const api = require('./api')
 const {Game} = require('./logic')
 const store = require('../store')
 const config = require('../config')
+const {console} = require('../config')
 const getFormFields = require('../../../lib/get-form-fields')
 
 const onGetAllGames = function (e) {

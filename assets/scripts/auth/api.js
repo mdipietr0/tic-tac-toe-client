@@ -1,9 +1,10 @@
 'use strict'
-
-const {DEBUG, apiUrl} = require('../config')
+const {console} = require('../config')
+const {apiUrl} = require('../config')
 const store = require('../store')
+
 const signUp = function (data) {
-  DEBUG && console.log('api signUp')
+  console.log('api signUp')
   return $.ajax({
     data,
     method: 'POST',
@@ -12,7 +13,7 @@ const signUp = function (data) {
 }
 
 const signIn = function (data) {
-  DEBUG && console.log('api signIn')
+  console.log('api signIn')
   return $.ajax({
     data,
     method: 'POST',
@@ -21,7 +22,7 @@ const signIn = function (data) {
 }
 
 const signOut = function () {
-  DEBUG && console.log('api signOut')
+  console.log('api signOut')
   return $.ajax({
     headers: {
       'Authorization': 'Token token=' + store.user.token
@@ -32,7 +33,7 @@ const signOut = function () {
 }
 
 const changePassword = function (data) {
-  DEBUG && console.log('api changePassword')
+  console.log('api changePassword')
   return $.ajax({
     data,
     headers: {

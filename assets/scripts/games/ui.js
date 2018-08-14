@@ -1,4 +1,5 @@
 'use strict'
+const {console} = require('../config')
 
 const {flash} = require('../templates/helpers/flash.js')
 const config = require('../config')
