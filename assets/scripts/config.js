@@ -81,7 +81,7 @@ if (window.location.hostname === 'localhost') {
   apiUrl = apiUrls.production
 }
 
-// console.log = function () {}
+console.log = function () {}
 
 module.exports = {
   console,
