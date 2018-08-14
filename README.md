@@ -1,3 +1,4 @@
+
 Technologies Used:
 
 HTML
@@ -11,11 +12,17 @@ Version 2 (Currently developing):
 
   - Multiplayer client
   - Test-Suite
+  - Display outs as circles like on the scoreboard
+	   -1 out for 1 in a row
+	   -2 outs for 2 in a row
+	   -3 outs for 3 in a row (Strikeout)
 
 
 Planning/Process:
+TODO
 
 Wireframe:
+![initial design](https://i.imgur.com/qDUpudt.png)
 
 User Stories:
   A user will be able to register an account
