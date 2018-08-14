@@ -164,10 +164,12 @@ const setTeamToken = function (team, player) {
     config.imgUrls.player1 = config.imgUrls[team]
     config.teamNames.player1 = team
     $('#player-x-wins').html(config.teamNames[config.teamNames.player1] + ' Wins:<br>')
+    $('.counter').text(0)
   } else {
     config.imgUrls.player2 = config.imgUrls[team]
     config.teamNames.player2 = team
     $('#player-o-wins').html(config.teamNames[config.teamNames.player2] + ' Wins:<br>')
+    $('.counter').text(0)
   }
 }
 

@@ -9,10 +9,10 @@ const apiUrls = {
 const imgUrls = {
   player1: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png`,
   player2: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/new_york_yankees_logo.png`,
-  redSox: 'https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png',
   dBacks: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/dbacks_logo.jpg`,
   braves: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/atlanta_braves_logo_2018-768x312.png`,
   orioles: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/baltimore_orioles_primary_logo.png`,
+  redSox: 'https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png',
   cubs: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/cubs_logo.jpg`,
   whiteSox: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/white-sox_logo.jpg`,
   reds: `https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/reds_logo.jpg`,
