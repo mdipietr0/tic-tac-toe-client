@@ -38,7 +38,7 @@ body {
 }
 
 @mixin flash($color) {
-  background-color: color;
+  background-color: $color;
   color: $white;
   padding: 10px;
 }
