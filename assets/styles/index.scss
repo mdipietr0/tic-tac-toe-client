@@ -1,12 +1,17 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 @import url('https://fonts.googleapis.com/css?family=Playball');
+
 $success-color: #5cb85c;
 $failure-color: #f00;
 $white: #fff;
+$red-sox-blue: #0c2340;
+$red-sox-red: #bd3039;
+$text-color-grey: #808080;
+
 
 body {
-  color: grey;
+  color: $text-color-grey;
   font-size: 16px;
 }
 
@@ -27,31 +32,34 @@ body {
   display: flex;
   justify-content: space-around;
 }
+
 .modal-title {
   text-align: center;
 }
-.success {
-  background-color: $success-color;
+
+@mixin flash($color) {
+  background-color: color;
   color: $white;
   padding: 10px;
+}
+
+.success {
+  @include flash($success-color)
 }
 
 .failure {
-  background-color: $failure-color;
-  color: $white;
-  padding: 10px;
-
+  @include flash($failure-color)
 }
 
 *:focus {
-    outline: none !important;
+  outline: none !important;
 }
 
 .banner {
-  font-size: 24px;
   color: $success-color;
+  font-size: 24px;
   padding: 10px;
-  text-align: center
+  text-align: center;
 }
 
 .playball {
@@ -65,8 +73,8 @@ h1 {
 }
 
 .landing-subtitle {
-  text-align: center;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .board {
@@ -76,25 +84,24 @@ h1 {
 }
 
 .box {
-  background-color: white;
   height: 150px;
   text-align: center;
 }
 
 .border-bottom {
-  border-bottom: solid 4px grey;
+  border-bottom: solid 4px $text-color-grey;
 }
 
 .border-top {
-  border-top: solid 4px grey;
+  border-top: solid 4px $text-color-grey;
 }
 
 .border-right {
-  border-right: solid 4px grey;
+  border-right: solid 4px $text-color-grey;
 }
 
 .border-left {
-  border-left: solid 4px grey;
+  border-left: solid 4px $text-color-grey;
 }
 
 .token {
@@ -116,6 +123,7 @@ h1 {
 .btn-select-game {
   margin-top: 20px;
 }
+
 .your-turn {
   text-align: center;
 }
@@ -123,8 +131,9 @@ h1 {
 .stat-header {
   text-align: center;
 }
+
 .navbar-inverse {
-  background-color: #0C2340;
+  background-color: $red-sox-blue;
 }
 
 .vs {
@@ -132,43 +141,43 @@ h1 {
 }
 
 .btn-primary {
-  background-color: #0C2340;
-}
+  background-color: $red-sox-blue;
 
-.btn-primary:hover {
-  background-color: #BD3039;
+  &:hover {
+    background-color: $red-sox-red;
+  }
 }
 
 .select-team {
-  border: solid 1px #000;
+  border: solid 1px $text-color-grey;
   border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 3px;
+  margin-top: 3px;
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  cursor: pointer;
 }
 
 .tiny-icon {
   float: right;
-  width: 5%;
   height: 5%;
+  width: 5%;
 }
 
 .title {
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 5%;
-  height: 5%;
   cursor: pointer;
+  height: 5%;
+  margin-bottom: auto;
+  margin-top: auto;
+  width: 5%;
 }
 
 .logo-token {
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 50%;
   height: 50%;
+  margin-bottom: auto;
+  margin-top: auto;
+  width: 50%;
 }
 
 .instruction-container {
@@ -181,69 +190,75 @@ h1 {
 }
 
 .title-container {
-  display: flex;
   align-content: center;
+  display: flex;
   justify-content: center;
   margin-top: 50px;
 }
+
 @media(max-width: 414px) {
   .title {
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 15%;
     height: 15%;
+    margin-bottom: auto;
+    margin-top: auto;
+    width: 15%;
   }
+
   .logo-instructions {
-    margin-top: 0px;
+    margin-top: 0;
     text-align: center;
   }
+
   .instructions {
     margin-top: 10px;
   }
-  .player-counter {
-    display: none;
-  }
+
   .game-button {
     margin: 10px auto;
   }
-  .game-button-container {
-    width: 300px;
-  }
+
+  .game-button-container,
   .login-button-container {
     width: 300px;
   }
+
+  .player-counter,
   .game-button-main {
     display: none;
   }
+
   .board {
     margin: auto;
     margin-top: 15px;
     width: 300px;
   }
+
   .token {
     font-size: 64px;
   }
+
   .box {
-    background-color: white;
     height: 100px;
     text-align: center;
   }
+
   .counter {
     font-size: 16px;
   }
+
   .border-bottom {
-    border-bottom: solid 1px grey;
+    border-bottom: solid 1px $text-color-grey;
   }
 
   .border-top {
-    border-top: solid 1px grey;
+    border-top: solid 1px $text-color-grey;
   }
 
   .border-right {
-    border-right: solid 1px grey;
+    border-right: solid 1px $text-color-grey;
   }
 
   .border-left {
-    border-left: solid 1px grey;
+    border-left: solid 1px $text-color-grey;
   }
 }
