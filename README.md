@@ -64,6 +64,6 @@ this was done I styled the app using Bootstrap, CSS, and a little SASS.
   - Multiplayer client
   - Test-Suite
   - Display outs as circles like on the scoreboard
-	   -1 out for 1 in a row
-	   -2 outs for 2 in a row
-	   -3 outs for 3 in a row (Strikeout)
+	   - 1 out for 1 in a row
+	   - 2 outs for 2 in a row
+	   - 3 outs for 3 in a row (Strikeout)
