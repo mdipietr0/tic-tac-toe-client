@@ -1,4 +1,4 @@
-# STRIKEOUT - a tic-tac-toe game
+# STRIKEOUT - A tic-tac-toe game
 Strikeout is an MLB themed in-browser tic-tac-toe client. It is a single page
 application (SPA) that interfaces with a state managing backend API using AJAX.
 
