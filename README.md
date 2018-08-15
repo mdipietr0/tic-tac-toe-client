@@ -1,8 +1,8 @@
-#STRIKEOUT - a tic-tac-toe game
+# STRIKEOUT - a tic-tac-toe game
 Strikeout is an MLB themed in-browser tic-tac-toe client. It is a single page
 application (SPA) that interfaces with a state managing backend API using AJAX.
 
-##Technologies Used:
+## Technologies Used:
 
 - HTML
 - CSS
@@ -12,7 +12,7 @@ application (SPA) that interfaces with a state managing backend API using AJAX.
 - AJAX
 - Git
 
-##Planning and Development process:
+## Planning and Development process:
 
 My process began with planning out how my client app would communicate with the
 API. I first determined what resources I would need from the API and what
@@ -37,10 +37,10 @@ node. I created a single Game object with a constructor function and prototype
 methods that I would then create and modify in my app as necessary. Once all
 this was done I styled the app using Bootstrap, CSS, and a little SASS.
 
-##Wireframe:
+## Wireframe:
 ![initial design](https://i.imgur.com/qDUpudt.png)
 
-##User Stories:
+## User Stories:
   - A user will be able to register an account
     - Upon success the user will also be signed in
     - Upon failure the user will be shown an error message
@@ -59,7 +59,7 @@ this was done I styled the app using Bootstrap, CSS, and a little SASS.
   - A user will be able to play tic-tac-toe
   - A user be shown the winner upon success
 
-##Version 2 (Currently developing):
+## Version 2 (Currently developing):
 
   - Multiplayer client
   - Test-Suite
