@@ -98,6 +98,7 @@ const onShowGameSuccess = function (response) {
   $('#game-list').addClass('hidden')
   // updateBoard()
   $('#game-container').removeClass('hidden')
+  initYourTurn()
 }
 
 const onShowGameFailure = function () {
