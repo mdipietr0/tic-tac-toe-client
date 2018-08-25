@@ -1,9 +1,7 @@
 'use strict'
 
-// console.log = {}
 const ui = require('./ui')
 const api = require('./api')
-// const logic = require('./logic')
 const {Game} = require('./logic')
 const store = require('../store')
 const config = require('../config')
@@ -179,9 +177,9 @@ const loadTeams = function () {
   let html = ''
   for (const imgName in config.imgUrls) {
     if (imgName === 'player1' || imgName === 'player2' || imgName === config.teamNames.player1 || imgName === config.teamNames.player2) {
-      // console.log('do nothing')
-      // console.log(imgName)
-      // console.log(config.imgUrls[imgName])
+      console.log('do nothing')
+      console.log(imgName)
+      console.log(config.imgUrls[imgName])
     } else {
       const image = config.imgUrls[imgName]
       console.log(imgName)

@@ -2,8 +2,6 @@
 
 const {console} = require('../config')
 
-// const store = require('../store')
-
 const Game = function (game = {cells: ['', '', '', '', '', '', '', '', ''], over: false}) {
   if (game) {
     this.id = game.id
@@ -45,16 +43,6 @@ const getWinner = function () {
 
 Game.prototype.getWinner = getWinner
 
-// const store = require('../store')
-// const board = []
-/**
- * Checks if the game is over
- *
- * @param {array} game
- *   array representing the 9 squares on the board
- * @param {number} player
- *   player number: must be {1, 2}
- */
 const didWin = function () {
   console.log(this)
   if ((this.cells[0] !== '' && this.cells[0] === this.cells[1] && this.cells[1] === this.cells[2]) ||
@@ -115,7 +103,6 @@ const isSquareAvailable = function (index) {
 
 Game.prototype.isSquareAvailable = isSquareAvailable
 
-// TODO be careful of pass by value
 const changePlayer = function () {
   console.log('changePlayer')
   if (this.player === 'x') {
@@ -168,25 +155,6 @@ const drawBoard = function (game) {
 }
 
 Game.prototype.drawBoard = drawBoard
-
-const game = new Game()
-console.log(game)
-game.makeMove(game.cells, 0, game.player)
-console.log(game)
-game.makeMove(game.cells, 2, game.player)
-console.log(game)
-game.makeMove(game.cells, 3, game.player)
-console.log(game)
-game.makeMove(game.cells, 5, game.player)
-console.log(game)
-game.makeMove(game.cells, 4, game.player)
-console.log(game)
-game.makeMove(game.cells, 8, game.player)
-console.log(game)
-game.makeMove(game.cells, 7, game.player)
-console.log(game)
-game.newGame(game)
-console.log(game)
 
 module.exports = {
   Game,
