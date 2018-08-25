@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Do not add `link` tags-->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand home hidden" href="#"><span class="playball">Strikeout</span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li id="register" data-toggle="modal" data-target="#registerModal">
+          <a href="#">
+            <span data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Register</span>
+          </a>
+        </li>
+        <li id="login" data-toggle="modal" data-target="#loginModal">
+          <a href="#">
+            <span data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Login</span>
+          </a>
+        </li>
+        <li id="sign-out" class="hidden">
+          <a href="#">
+            <span data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Sign-Out</span>
+          </a>
+        </li>
+        <li id="change-password-btn" class="hidden" data-toggle="modal" data-target="#changePasswordModal">
+          <a href="#">
+            <span data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Change Password</span>
+          </a>
+        </li>
+        <li id="welcome" class="hidden" data-toggle="modal" data-target="#statsModal">
+          <a href="#">
+            <span id="username" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></span>
+          </a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+  <h4 id="auth-flash"></h4>
+  <div id="title-logo">
+  <h1><span class="playball">Strikeout</span></h1>
+  <h4 class="landing-subtitle">(A tic-tac-toe game)</h4>
+  </div>
+  <div class="title-container">
+    <img alt="player-1-logo" class="title" data-player="1" data-toggle="modal" data-target="#teamModal" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2017/05/boston_red_sox_logo.png">
+      <h2 class="vs">vs.</h2>
+    <img alt="player-2-logo" class="title" data-player="2" data-toggle="modal" data-target="#teamModal" src="https://mk0teamcolorcodtgc6i.kinstacdn.com/wp-content/uploads/2014/05/new_york_yankees_logo.png">
+  </div>
+
+  <div class="landing-container">
+    <div class="instruction-container">
+      <div class="instructions"><h3>Login to play a game</h3></div>
+    </div>
+
+    <div class="container login-button-container">
+        <div class="form group">
+          <button class="btn btn-primary col-md-offset-3 col-md-6 game-button form-control" data-toggle="modal" data-target="#loginModal">Login</button>
+        </div>
+    </div>
+  </div>
+    <div>
+
+    <h4 id="winner-banner" class="hidden banner"></h4>
+  </div>
+  <div id="game-buttons" class="container hidden game-button-container">
+    <div class="hidden menu-container">
+      <div class="instruction-container">
+        <div class="logo-instructions instructions"><h3>Click on the logo to select your team</h3></div>
+      </div>
+    </div>
+
+    <form>
+    <div class="form group">
+      <button id="new-game" class="btn btn-primary col-md-offset-3 col-md-6 game-button form-control">New Game</button>
+    </div>
+    <div class="form group">
+      <button id="load-game" class="btn btn-primary col-md-offset-3 col-md-6 game-button form-control">Load Game</button>
+    </div>
+    </form>
+  </div>
+  <div id="game-list" class="align-center hidden"></div>
+  <!-- <div class="container game-button-container">
+    <button id="main-menu" class="btn-block hidden btn btn-primary game-button game-button-main">Main Menu</button>
+  </div> -->
+
+
+  <div class="modal fade" id="teamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Select Team</h4>
+        </div>
+        <div class="modal-body">
+          <h4 class="team-header">Teams:</h4>
+          <div class="select-team-container"></div>
+              <!-- TODO dynamically add all teams to select from -->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <!-- Modal -->
+
+  <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="userLabel"></h4>
+        </div>
+        <div class="modal-body">
+          <h4 class="stat-header">Stats</h4>
+          <h5>Total Games: <span id="total-games" class="pull-right">0</span></h5>
+          <h5>Games Finished: <span id="games-finished" class="pull-right">0</span></h5>
+          <h5>Games Drew: <span id="games-drew" class="pull-right">0</span></h5>
+          <h5>Games Won: <span id="games-won" class="pull-right">0</span></h5>
+          <h5>Games Lost: <span id="games-lost" class="pull-right">0</span></h5>
+          <button class="btn btn-block btn-default" type="submit" data-target="#statsModal" data-dismiss="modal">Ok</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Register</h4>
+        </div>
+        <div class="modal-body">
+          <form id='sign-up' class="form-group">
+            <fieldset>
+              <div class="form-group">
+                <input class ="form-control" type="email" name ='credentials[email]' placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input class ="form-control" type="password" name ='credentials[password]' placeholder="Password" required>
+              </div>
+              <div class="form-group">
+                <input class ="form-control" type="password" name ='credentials[password_confirmation]' placeholder="Confirm Password" required>
+              </div>
+              <button class="btn btn-block btn-primary" type="submit">Sign Up</button>
+              <hr>
+              <button class="btn btn-block btn-default" type="submit" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Login</button>
+            </fieldset>
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Login</h4>
+        </div>
+        <div class="modal-body">
+          <form id='sign-in' class="form-group">
+            <fieldset>
+              <div class="form-group">
+                <input class ="form-control" type="email" name ='credentials[email]' placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input class ="form-control" type="password" name ='credentials[password]' placeholder="Password" required>
+              </div>
+              <button id="sign-in-btn" class="btn btn-block btn-primary" data-toggle="modal" type="submit">Sign In</button>
+              <hr>
+              <button class="btn btn-block btn-default" type="submit" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Sign Up</button>
+            </fieldset>
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+        </div>
+        <div class="modal-body">
+          <form id='change-password' class="form-group">
+            <fieldset>
+              <div class="form-group">
+                <input class ="form-control" type="password" name ='passwords[old]' placeholder="Old Password" required>
+              </div>
+              <div class="form-group">
+                <input class ="form-control" type="password" name ='passwords[new]' placeholder="New Password" required>
+              </div>
+              <button class="btn btn-block btn-primary" type="submit">Change Password</button>
+              <hr>
+              <button class="btn btn-block btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </fieldset>
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div id="game-container" class="container hidden">
+    <h4 class="your-turn" data-player="X"></h4>
+    <div class="counter-box">
+      <div class="player-counter"><span id="player-x-wins">Red Sox Wins:<br></span><span class="counter" id="counterX">0</span></div>
+      <div id="game-board" class="board">
+        <div class="row article">
+          <div id="box-0" class="col-xs-4 box border-bottom border-right"><span class="token hidden">X</span></div>
+          <div id="box-1" class="col-xs-4 box border-bottom border-right border-left"><span class="token hidden">X</span></div>
+          <div id="box-2" class="col-xs-4 box border-bottom border-left"><span class="token hidden">X</span></div>
+        </div>
+        <div class="row article">
+          <div id="box-3" class="col-xs-4 box border-bottom border-right border-top"><span class="token hidden">X</span></div>
+          <div id="box-4" class="col-xs-4 box border-bottom border-right border-top border-left"><span class="token hidden">X</span></div>
+          <div id="box-5" class="col-xs-4 box border-bottom border-left border-top"><span class="token hidden">X</span></div>
+        </div>
+        <div class="row article">
+          <div id="box-6" class="col-xs-4 box border-right border-top"><span class="token hidden">X</span></div>
+          <div id="box-7" class="col-xs-4 box border-right border-top border-left"><span class="token hidden">X</span></div>
+          <div id="box-8" class="col-xs-4 box border-left border-top"><span class="token hidden">X</span></div>
+        </div>
+      </div>
+      <div class="player-counter"><span id="player-o-wins">Yankee Wins:<br></span><span class="counter" id="counterO">0</span></div>
+    </div>
+
+    <!-- <button id="games-index">Get all games</button>
+    <button id="games-create">Create game</button>
+    <form id="games-show">
+      <input type="number" name="id" placeholder="ID">
+      <button>Show game</button>
+    </form>
+
+    <form id="games-update">
+      <input name="id" type="text" placeholder="ID">
+      <input name="game[cell][index]" type="text" placeholder="Index">
+      <input name="game[cell][value]" type="text" placeholder="Value">
+      <input name="game[over]" type="text" placeholder="gameover" value="false">
+      <button>Update game</button>
+    </form> -->
+  </div>
+
+
+</body>
+</html>
