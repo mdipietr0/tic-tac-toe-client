@@ -17,7 +17,6 @@ const updateBoard = function (cells) {
   cells.forEach((cell, i) => {
     console.log(i + ' ' + cell)
     if (cell !== '') {
-      // update to show image
       let html
       if (cell === 'x') {
         html = `<img class="logo-token" src="${config.imgUrls.player1}">`
@@ -38,8 +37,7 @@ const changeTurn = function () {
   player = player === 'X' ? 'O' : 'X'
   yourTurn.attr('data-player', player)
   console.log('player = ' + player)
-  let text // = yourTurn.text()
-  // text = text.slice(0, text.length - 1) + player
+  let text
   if (player === 'O') {
     text = `${config.teamNames[config.teamNames.player2]} are up to bat!`
   } else if (player === 'X') {
@@ -50,7 +48,6 @@ const changeTurn = function () {
 
 const onGetAllGamesSuccess = function (response) {
   console.log('onGetAllGamesSuccess')
-  // flash(true, 'Get all games successful')
   let html = `<h4 class="col-md-offset-5 col-md-2 text-center align-center">Select a game</h4>`
   console.log(response.games)
   response.games.filter(game => game.over === false).reduce((acc, game) => {
@@ -94,10 +91,9 @@ const onCreateGameFailure = function () {
 
 const onShowGameSuccess = function (response) {
   console.log('onShowGameSuccess')
-  // flash(true, 'Show game successful')
   $('#game-list').addClass('hidden')
-  // updateBoard()
   $('#game-container').removeClass('hidden')
+  initYourTurn()
 }
 
 const onShowGameFailure = function () {
@@ -124,23 +120,27 @@ const onWin = function (winner) {
     winCount += 1
     console.log(winCount)
     $(`#counter${winner}`).text(winCount)
-    $('#winner-banner').text(`${winner === 'X' ? config.teamNames[config.teamNames.player1] : config.teamNames[config.teamNames.player2]} Win!!!`)
-    $('#winner-banner').removeClass('hidden')
-    $('#game-buttons').removeClass('hidden')
-    $('#main-menu').addClass('hidden')
-    $('#game-container').addClass('hidden')
+    const teamText = winner === 'X'
+      ? config.teamNames[config.teamNames.player1]
+      : config.teamNames[config.teamNames.player2]
+    const text = `${teamText} Win!!!`
+    onGameOver(text)
   }, 300)
 }
 
 const onDraw = function () {
   setTimeout(function () {
     console.log('game over, Draw')
-    $('#winner-banner').text(`Extra Innings!!`)
-    $('#winner-banner').removeClass('hidden')
-    $('#main-menu').addClass('hidden')
-    $('#game-buttons').removeClass('hidden')
-    $('#game-container').addClass('hidden')
+    onGameOver(`Extra Innings!!`)
   }, 300)
+}
+
+const onGameOver = function (text) {
+  $('#winner-banner').text(text)
+  $('#winner-banner').removeClass('hidden')
+  $('#main-menu').addClass('hidden')
+  $('#game-buttons').removeClass('hidden')
+  $('#game-container').addClass('hidden')
 }
 
 const onMainMenu = function () {

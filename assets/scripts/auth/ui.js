@@ -7,13 +7,6 @@ const {console} = require('../config')
 const onSignUpSuccess = function () {
   console.log('onSignUpSuccess')
   $('#registerModal').modal('hide')
-  $('#sign-up input').val('')
-  $('#register').addClass('hidden')
-  $('#login').addClass('hidden')
-  $('#sign-out').removeClass('hidden')
-  $('#change-password-btn').removeClass('hidden')
-  // flash(true, 'Successfully signed up')
-  return new Promise((resolve, reject) => resolve())
 }
 
 const onSignUpFailure = function () {

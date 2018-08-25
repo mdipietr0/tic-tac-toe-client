@@ -37,8 +37,8 @@ node. I created a single Game object with a constructor function and prototype
 methods that I would then create and modify in my app as necessary. Once all
 this was done I styled the app using Bootstrap, CSS, and a little SASS.
 
-## Wireframe:
-![initial design](https://i.imgur.com/qDUpudt.png)
+##Wireframe:
+![Initial Wireframe](https://i.imgur.com/rgWk2bS.png)
 
 ## User Stories:
   - A user will be able to register an account

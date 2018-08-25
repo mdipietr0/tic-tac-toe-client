@@ -1,9 +1,7 @@
 'use strict'
 
-// console.log = {}
 const ui = require('./ui')
 const api = require('./api')
-// const logic = require('./logic')
 const {Game} = require('./logic')
 const store = require('../store')
 const config = require('../config')
@@ -155,6 +153,7 @@ const onTeamSelect = function (e) {
   console.log(config.imgUrls[team])
   $(`img[data-player="${player}"]`).attr(`src`, config.imgUrls[team])
   setTeamToken(team, player)
+  loadTeams()
 }
 
 const setTeamToken = function (team, player) {
@@ -177,10 +176,10 @@ const setTeamToken = function (team, player) {
 const loadTeams = function () {
   let html = ''
   for (const imgName in config.imgUrls) {
-    if (imgName === 'player1' || imgName === 'player2') {
-      // console.log('do nothing')
-      // console.log(imgName)
-      // console.log(config.imgUrls[imgName])
+    if (imgName === 'player1' || imgName === 'player2' || imgName === config.teamNames.player1 || imgName === config.teamNames.player2) {
+      console.log('do nothing')
+      console.log(imgName)
+      console.log(config.imgUrls[imgName])
     } else {
       const image = config.imgUrls[imgName]
       console.log(imgName)
@@ -189,7 +188,7 @@ const loadTeams = function () {
       `
     }
   }
-  $('.select-team-container').append(html)
+  $('.select-team-container').html(html)
 }
 
 loadTeams()
@@ -208,7 +207,7 @@ const addHandlers = function () {
   $('.home').on('click', onMainMenu)
   $('#welcome').on('click', onWelcome)
   $('.title').on('click', onLogo)
-  $('.select-team').on('click', onTeamSelect)
+  $('.select-team-container').on('click', 'h5', onTeamSelect)
 }
 
 module.exports = {
