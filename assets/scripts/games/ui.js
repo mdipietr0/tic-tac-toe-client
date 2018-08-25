@@ -65,15 +65,19 @@ const onGetAllGamesFailure = function () {
   flash(false, 'Get all games failure')
 }
 
-const initYourTurn = function () {
+const initYourTurn = function (player) {
   console.log(config.teamNames[config.teamNames.player1])
-  $('.your-turn').attr('data-player', 'X')
-  $('.your-turn').text(`${config.teamNames[config.teamNames.player1]} are up to bat!`)
+  $('.your-turn').attr('data-player', player)
+  if (player === 'X') {
+    $('.your-turn').text(`${config.teamNames[config.teamNames.player1]} are up to bat!`)
+  } else {
+    $('.your-turn').text(`${config.teamNames[config.teamNames.player2]} are up to bat!`)
+  }
 }
 
 const onCreateGameSuccess = function () {
   console.log('onCreateGameSuccess')
-  initYourTurn()
+  initYourTurn('X')
   // flash(true, 'Create game successful')
   setTimeout(function () {
     $('#winner-banner').addClass('hidden')
@@ -93,7 +97,6 @@ const onShowGameSuccess = function (response) {
   console.log('onShowGameSuccess')
   $('#game-list').addClass('hidden')
   $('#game-container').removeClass('hidden')
-  initYourTurn()
 }
 
 const onShowGameFailure = function () {
@@ -173,5 +176,6 @@ module.exports = {
   onWin,
   onDraw,
   setStats,
-  changeTurn
+  changeTurn,
+  initYourTurn
 }

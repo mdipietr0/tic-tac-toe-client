@@ -45,6 +45,7 @@ const onShowGame = function (e) {
     .then(function (response) {
       store.game = new Game(response.game)
       store.game.getCurrentPlayer()
+      ui.initYourTurn(store.game.player.toUpperCase())
       ui.updateBoard(store.game.cells)
     })
     .then(ui.onShowGameSuccess)
